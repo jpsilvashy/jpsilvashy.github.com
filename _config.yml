@@ -1,0 +1,8 @@
+markdown: rdiscount
+pygments: true
+permalink: /:title
+paginate: 10
+category_dir: topics
+category_title_prefix:
+exclude:
+destination: public
