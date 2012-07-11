@@ -1,12 +1,10 @@
 ---
 layout: post
-title: Lorem Ipsum
+title: Hello World
+date: 2012-07-11
+category:
+tags: []
 ---
-
-{{ page.title }}
-================
-
-<p class="meta">4 July 2012 - San Francisco</p>
 
 Truffaut food truck mcsweeney's, Tattooed lomo godard, bushwick kogi brooklyn sustainable. Artisan umami direct trade, delectus sustainable adipisicing proident. Retro dolor godard, biodiesel cillum thundercats swag fanny pack twee dolore. Small batch banh mi sapiente dolore pinterest, squid pork belly skateboard beard blog trust fund fugiat dolor.
 
