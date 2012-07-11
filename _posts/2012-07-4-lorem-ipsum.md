@@ -6,7 +6,7 @@ title: Lorem Ipsum
 {{ page.title }}
 ================
 
-<p class="meta">4 July 2011 - San Francisco</p>
+<p class="meta">4 July 2012 - San Francisco</p>
 
 Truffaut food truck mcsweeney's, Tattooed lomo godard, bushwick kogi brooklyn sustainable. Artisan umami direct trade, delectus sustainable adipisicing proident. Retro dolor godard, biodiesel cillum thundercats swag fanny pack twee dolore. Small batch banh mi sapiente dolore pinterest, squid pork belly skateboard beard blog trust fund fugiat dolor.
 
