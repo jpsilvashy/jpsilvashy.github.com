@@ -7,7 +7,7 @@ tags: ['ruby', 'ubuntu', 'aws']
 ---
 
 <div class='leader_note'>
-	This is post 1 of 2, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Skip to part 2 &rarr;</a>
+	This is part 1 of 3, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Skip to part 2 &rarr;</a>
 </div>
 
 If you haven't deployed a Ruby application on Amazon Web Services EC2 yet, you're really missing out. It's largely a simple and enjoyable process. I'm always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.

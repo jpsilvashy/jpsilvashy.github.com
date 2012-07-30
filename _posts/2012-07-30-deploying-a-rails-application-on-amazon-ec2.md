@@ -7,7 +7,7 @@ tags: []
 ---
 
 <div class='leader_note'>
-	This is post 2 of 2, in my series on deploying Rails applications. <a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/">Go to part 1 &rarr;</a>
+	This is part 2 of 3, in my series on deploying Rails applications.
 </div>
 
 This is a continuation of my previous blog post [Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2](/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/), I realize that a lot of people have experience with Amazon EC2 so I decided to break it into several parts, that way if you're already comfortable navigating AWS's menus, you can zip through or just skip the first part.
@@ -16,7 +16,7 @@ This is a continuation of my previous blog post [Setting up Ubuntu with Ruby 1.9
 
 Let's jump right in. We're going to deploy our rails app using [Capistrano](https://github.com/capistrano/capistrano). So in your local rails app, let's get capistrano setup. Let's add `capistrano`, to our `Gemfile` in our application.
 
-<pre>
+<pre class="prettyprint lang-ruby">
 gem 'capistrano'
 </pre>
 
@@ -36,11 +36,11 @@ $ capify .
 
 So you'll see that it created two files, we'll be focusing on `deploy.rb` for now. Let's just remove everything in that file and start from scratch. First let's get the application name in there:
 
-<pre>
+<pre class="prettyprint lang-ruby">
 set :application, "blog"
 </pre>
 
-<pre>
+<pre class="prettyprint lang-ruby">
 set :scm, :git
 set :repository, "git@github.com:jpsilvashy/blog.git"
 set :scm_passphrase, ""
@@ -48,13 +48,13 @@ set :scm_passphrase, ""
 
 Also remember we're just using the `ubuntu` user, in a more serious situation I'd probably create a user just for deploying the app, this would allow us to sort of "silo" the users activty and access to stopping and starting other services, or worse running some malicous code on the server.
 
-<pre>
+<pre class="prettyprint lang-ruby">
 set :user, "ubuntu"
 </pre>
 
 Since, in our case, the server will house the application itself, the webserver, and the database, we have to tell capistrano that all our tasks related to deploying these services are on the same server, let's just say the domain name we have is "my_cat_blog.com", you could also use your IP address as a string here. We'll also add the path to where the app should be `deployed_to`.
 
-<pre>
+<pre class="prettyprint lang-ruby">
 server "my_cat_blog.com", :app, :web, :db, :primary => true
 set :deploy_to, "/var/www/blog"
 </pre>
@@ -134,6 +134,26 @@ Bundler version 1.1.5
 
 Then we need to generate an SSH key, we'll give that to Github so our server can pull the latest version of our application code when we deploy the application.
 
+We want the default settings so when asked to enter a file in which to save the key, just press enter. In my case I'm not setting a passphrase for my keyfile, you may wish to do this if you are concerned with someone accessing your files and getting a hold of your keyfiles.
 
+<pre>
+ssh-keygen -t rsa -C "your_email@example.com"
+</pre>
+
+Since we're using Github (you don't have to use Github, you can host your code anywhere), we need to tell Github that the server is allowed to access my repositories.
+
+<pre>
+cat /home/ubuntu/.ssh/id_rsa.pub
+</pre>
+
+You should have file one long line that starts with `ssh-rsa`, and ends with your email address.
+
+Let's go copy the files content to our clipboard and head over to [github.com/settings/ssh](https://github.com/settings/ssh), add the key and give it a name.
+
+Now let's go back to our local computer and try to deploy our application code to the server. We'll try it `cold` first, this will basically mimic the actual deploy process, but not actual create any files or affect any services.
+
+<pre>
+cap deploy:cold
+</pre>
 
 

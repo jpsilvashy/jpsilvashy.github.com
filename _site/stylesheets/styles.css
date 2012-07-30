@@ -79,6 +79,7 @@ pre {
   border-radius:3px;
   overflow-x: auto;
   text-shadow:0 1px 0 black;
+  border-bottom: 1px solid black;
 }
 
 table {
