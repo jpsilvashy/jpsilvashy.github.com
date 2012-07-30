@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title></title>
+  <title>Changing your hostname on Ubuntu</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -23,15 +23,44 @@
     </header>
 
     <section>
-      <ul class="posts">
+      <div id="post">
+  <h1>Changing your hostname on Ubuntu</h1>
+  <p class="meta"></p>
 
-  <li><a href="/posts/deploying-a-rails-application-on-amazon-ec2">Deploying a Rails Application on Amazon EC2</a> &mdash; 30 Jul 2012</li>
+  <p>If you&#8217;re using Amazon AWS, your instance will likely have a hostname which matches the initial hostname and IP issued when you provisioned your server.</p>
 
-  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
+<p>So on your server you&#8217;ll need to update <code>/etc/hostname</code>.</p>
+<pre>
+sudo vi /etc/hostname
+</pre>
+<p>You&#8217;ll see there is only one line in this file, go ahead and change it to the new hostname you&#8217;d like.</p>
+<pre>
+myserver
+</pre>
+<p>Then you&#8217;ll also need to update <code>/etc/hosts</code>, under the first line which should look something like this, add your hostname and the localhost IP address.</p>
+<pre>
+127.0.0.1 localhost
+127.0.0.1 myserver
 
-  <li><a href="/posts/changing-your-hostname-on-ubuntu">Changing your hostname on Ubuntu</a> &mdash; 20 Jun 2012</li>
+...
+</pre>
+<p>Then I typically reboot the machine.</p>
+<pre>
+sudo reboot
+</pre>
+<p>When you log back in use the command <code>hostname</code> to check that your changes have taken effect.</p>
+</div>
 
-</ul>
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+	  <li><a href="/posts/deploying-a-rails-application-on-amazon-ec2">Deploying a Rails Application on Amazon EC2</a> &mdash; 30 Jul 2012</li>
+    
+	  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
+    
+  </ul>
+</div>
     </section>
 
     <footer>

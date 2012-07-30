@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-30T02:08:21-07:00</updated>
+ <updated>2012-07-30T11:28:52-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -231,6 +231,35 @@ ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 &lt;div class='callout'&gt;
 	This is post 1 of 2, in my series on deploying Rails applications. &lt;a href='/posts/deploying-a-rails-application-on-amazon-ec2/'&gt;Go to part 2 &amp;rarr;&lt;/a&gt;
 &lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Changing your hostname on Ubuntu</title>
+   <link href="http://jpsilvashy.com/posts/changing-your-hostname-on-ubuntu"/>
+   <updated>2012-06-20T00:00:00-07:00</updated>
+   <id>http://jpsilvashy.com/posts/changing-your-hostname-on-ubuntu</id>
+   <content type="html">&lt;p&gt;If you&amp;#8217;re using Amazon AWS, your instance will likely have a hostname which matches the initial hostname and IP issued when you provisioned your server.&lt;/p&gt;
+
+&lt;p&gt;So on your server you&amp;#8217;ll need to update &lt;code&gt;/etc/hostname&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;
+sudo vi /etc/hostname
+&lt;/pre&gt;
+&lt;p&gt;You&amp;#8217;ll see there is only one line in this file, go ahead and change it to the new hostname you&amp;#8217;d like.&lt;/p&gt;
+&lt;pre&gt;
+myserver
+&lt;/pre&gt;
+&lt;p&gt;Then you&amp;#8217;ll also need to update &lt;code&gt;/etc/hosts&lt;/code&gt;, under the first line which should look something like this, add your hostname and the localhost IP address.&lt;/p&gt;
+&lt;pre&gt;
+127.0.0.1 localhost
+127.0.0.1 myserver
+
+...
+&lt;/pre&gt;
+&lt;p&gt;Then I typically reboot the machine.&lt;/p&gt;
+&lt;pre&gt;
+sudo reboot
+&lt;/pre&gt;
+&lt;p&gt;When you log back in use the command &lt;code&gt;hostname&lt;/code&gt; to check that your changes have taken effect.&lt;/p&gt;</content>
  </entry>
  
 
