@@ -48,26 +48,26 @@
 <h2 id='setting_up_the_server'>Setting up the Server</h2>
 
 <p>Now fire up your terminal. Let&#8217;s first configure our SSH client so we don&#8217;t have to provide our credentials all the time. I usually keep all my key files in the same directory. So open up <code>~/.ssh/config</code>, mine looks like this for our blog project:</p>
-<pre class='prettyprint'>
+<pre>
 Host 50.11.131.12
   User ubuntu
   IdentityFile /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
 </pre>
 <p>Lastly before you can SSH to your new server change the permissions of the key pair file to 600.</p>
-<pre class='prettyprint'>
+<pre>
 chmod 600 /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
 </pre>
 <p>Next, SSH to the server as the <code>ubuntu</code> user.</p>
-<pre class='prettyprint'>
+<pre>
 ssh ubuntu@50.11.131.12
 </pre>
 <p>Okay, you should be logged into the server now! Good job! Now it&#8217;s time to get our hands dirty. We&#8217;ll be using <code>apt-get</code>, to setup most of the packages we&#8217;ll need. Let&#8217;s first make sure we have all the latest updates for Ubuntu.</p>
-<pre class='prettyprint'>
+<pre>
 sudo apt-get update
 sudo apt-get upgrade
 </pre>
 <p>Next, let&#8217;s get some of the basic packages that we&#8217;ll need installed, this will help with the remainder of the setup.</p>
-<pre class='prettyprint'>
+<pre>
 sudo apt-get install git build-essential
 </pre>
 <p>So to clear things up, that&#8217;ll install Git, and the complication tools you&#8217;ll need to build the other packages, like GCC.</p>
@@ -75,17 +75,17 @@ sudo apt-get install git build-essential
 <h2 id='installing_ruby'>Installing Ruby</h2>
 
 <p>Lastly, we&#8217;ll need to get Ruby setup, but before we can actually install Ruby there are a few basic libraries that you are likely to need.</p>
-<pre class='prettyprint'>
+<pre>
 sudo apt-get install openssl libreadline6 libreadline6-dev \
 zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
 libxslt-dev autoconf libc6-dev ncurses-dev
 </pre>
 <p>That takes care of the basic dependencies, now we&#8217;ll install Ruby <strong>1.9.3</strong>, now this point is really important, even thoght the package name in the apt repository is <code>ruby1.9.1</code>, you&#8217;ll actually install Ruby 1.9.3. The reason it&#8217;s named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.</p>
-<pre class='prettyprint'>
+<pre>
 sudo apt-get install ruby1.9.1
 </pre>
 <p>Lastly, be sure you have the currect version:</p>
-<pre class='prettyprint'>
+<pre>
 $ ruby -v
 ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 </pre>
