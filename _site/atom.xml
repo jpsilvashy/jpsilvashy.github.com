@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-29T22:39:49-07:00</updated>
+ <updated>2012-07-29T22:42:34-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -21,11 +21,11 @@
 
 &lt;h2 id='provisioning_the_server_on_ec2'&gt;Provisioning the Server on EC2&lt;/h2&gt;
 
-&lt;p&gt;Head over to &lt;a href='http://aws.amazon.com'&gt;aws.amazon.com&lt;/a&gt; to get started. Log-in then go to the &lt;a href='https://console.aws.amazon.com/ec2/'&gt;EC2 panel&lt;/a&gt;, click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we&amp;#8217;ll use that one). LTS (Long Term Support) releases are always the better choice because the&amp;#8217;ll receive security and bug fixes for 5 years.&lt;/p&gt;
+&lt;p&gt;Head over to &lt;a href='http://aws.amazon.com'&gt;aws.amazon.com&lt;/a&gt; to get started. Log-in then go to the &lt;a href='https://console.aws.amazon.com/ec2/'&gt;EC2 panel&lt;/a&gt;, click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we&amp;#8217;ll use that one). LTS (Long Term Support) releases are always the better choice because they&amp;#8217;ll receive security and bug fixes for 5 years.&lt;/p&gt;
 
-&lt;p&gt;I typically choose to launch a Small Instance (m1.small) when I&amp;#8217;m just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you&amp;#8217;ll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I&amp;#8217;d probably bump the size of the volume up accordingly.&lt;/p&gt;
+&lt;p&gt;I typically choose to launch a Small Instance (m1.small) when I&amp;#8217;m just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you&amp;#8217;ll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I&amp;#8217;d probably bump the size of the volume up accordingly. Click Continue again.&lt;/p&gt;
 
-&lt;p&gt;Click Continue again, leave a name for your instance, I&amp;#8217;m naming mine &lt;code&gt;blog&lt;/code&gt;, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&amp;#8217;ll name it &lt;code&gt;blog&lt;/code&gt;, and download the key pair, don&amp;#8217;t lose this file, it&amp;#8217;ll probably be named &lt;code&gt;blog.pem&lt;/code&gt;. Click continue.&lt;/p&gt;
+&lt;p&gt;Now you have the option to leave a name for your instance, I&amp;#8217;m naming mine &lt;code&gt;blog&lt;/code&gt;, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&amp;#8217;ll name it &lt;code&gt;blog&lt;/code&gt;, and download the key pair, don&amp;#8217;t lose this file, it&amp;#8217;ll probably be named &lt;code&gt;blog.pem&lt;/code&gt;. Click continue.&lt;/p&gt;
 
 &lt;p&gt;Create a new Security Group. Let&amp;#8217;s just name it the same as the instance, blog (you&amp;#8217;re also required to leave a description). Since we&amp;#8217;ll be using a web server (HTTP), we&amp;#8217;ll need port &lt;code&gt;80&lt;/code&gt; open, as well as &lt;code&gt;22&lt;/code&gt; so we can SSH to the server.&lt;/p&gt;
 
@@ -70,7 +70,7 @@ sudo apt-get install openssl libreadline6 libreadline6-dev \
 zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
 libxslt-dev autoconf libc6-dev ncurses-dev
 &lt;/pre&gt;
-&lt;p&gt;That takes care of the basic dependencies, now we&amp;#8217;ll install Ruby &lt;strong&gt;1.9.3&lt;/strong&gt;, now this point is really important, even thoght the package name in the apt repository is &lt;code&gt;ruby1.9.1&lt;/code&gt;, you&amp;#8217;ll actually install Ruby 1.9.3. The reason it&amp;#8217;s named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.&lt;/p&gt;
+&lt;p&gt;That takes care of the basic dependencies, now we&amp;#8217;ll install Ruby &lt;strong&gt;1.9.3&lt;/strong&gt;, now this point is really important, even though the package name in the apt repository is &lt;code&gt;ruby1.9.1&lt;/code&gt;, you&amp;#8217;ll actually install Ruby 1.9.3. The reason it&amp;#8217;s named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.&lt;/p&gt;
 &lt;pre&gt;
 sudo apt-get install ruby1.9.1
 &lt;/pre&gt;

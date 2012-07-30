@@ -12,9 +12,9 @@ If you haven't deployed a Ruby application on Amazon Web Services EC2 yet, you'r
 
 Head over to [aws.amazon.com](http://aws.amazon.com) to get started. Log-in then go to the [EC2 panel](https://console.aws.amazon.com/ec2/), click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we'll use that one). LTS (Long Term Support) releases are always the better choice because they'll receive security and bug fixes for 5 years.
 
-I typically choose to launch a Small Instance (m1.small) when I'm just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you'll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I'd probably bump the size of the volume up accordingly.
+I typically choose to launch a Small Instance (m1.small) when I'm just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you'll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I'd probably bump the size of the volume up accordingly. Click Continue again.
 
-Click Continue again, leave a name for your instance, I'm naming mine `blog`, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we'll name it `blog`, and download the key pair, don't lose this file, it'll probably be named `blog.pem`. Click continue.
+Now you have the option to leave a name for your instance, I'm naming mine `blog`, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we'll name it `blog`, and download the key pair, don't lose this file, it'll probably be named `blog.pem`. Click continue.
 
 Create a new Security Group. Let's just name it the same as the instance, blog (you're also required to leave a description). Since we'll be using a web server (HTTP), we'll need port `80` open, as well as `22` so we can SSH to the server.
 
