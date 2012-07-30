@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-29T20:12:15-07:00</updated>
+ <updated>2012-07-29T20:14:34-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -60,7 +60,7 @@ sudo apt-get upgrade
 &lt;/pre&gt;
 &lt;p&gt;Next, let&amp;#8217;s get some of the basic packages that we&amp;#8217;ll need installed, this will help with the remainder of the setup.&lt;/p&gt;
 &lt;pre class='prettyprint'&gt;
-sudo apt-get install git build essentials
+sudo apt-get install git build-essential
 &lt;/pre&gt;
 &lt;p&gt;So to clear things up, that&amp;#8217;ll install Git, and the complication tools you&amp;#8217;ll need to build the other packages, like GCC.&lt;/p&gt;
 

@@ -58,7 +58,7 @@ sudo apt-get upgrade
 Next, let's get some of the basic packages that we'll need installed, this will help with the remainder of the setup.
 
 <pre class="prettyprint">
-sudo apt-get install git build essentials
+sudo apt-get install git build-essential
 </pre>
 
 So to clear things up, that'll install Git, and the complication tools you'll need to build the other packages, like GCC.
