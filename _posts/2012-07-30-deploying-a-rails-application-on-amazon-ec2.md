@@ -59,6 +59,8 @@ server "my_cat_blog.com", :app, :web, :db, :primary => true
 set :deploy_to, "/var/www/blog"
 </pre>
 
+[Here is the complete `deploy.rb`](https://gist.github.com/3205604). Remeber to update the variables to match your servers hostname or IP address.
+
 ## Testing Out Our Deploy Recipe
 
 Let's see if our recipe works! From your project root on your local machine, run:

@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-30T00:58:15-07:00</updated>
+ <updated>2012-07-30T01:04:40-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -55,6 +55,8 @@ set :user, &quot;ubuntu&quot;
 server &quot;my_cat_blog.com&quot;, :app, :web, :db, :primary =&gt; true
 set :deploy_to, &quot;/var/www/blog&quot;
 &lt;/pre&gt;
+&lt;p&gt;&lt;a href='https://gist.github.com/3205604'&gt;Here is the complete &lt;code&gt;deploy.rb&lt;/code&gt;&lt;/a&gt;. Remeber to update the variables to match your servers hostname or IP address.&lt;/p&gt;
+
 &lt;h2 id='testing_out_our_deploy_recipe'&gt;Testing Out Our Deploy Recipe&lt;/h2&gt;
 
 &lt;p&gt;Let&amp;#8217;s see if our recipe works! From your project root on your local machine, run:&lt;/p&gt;
