@@ -164,19 +164,19 @@ The output should scroll by as though it were deploying the app and cloning the 
 	If you receive the error <code>Host key verification failed</code>, you might want to SSH to the remote machine and try cloning your repository from there first, this will ask you if you want to add Github to your list of known hosts. Choose yes, hopefully that solves the issue.
 </div>
 
-If everything seems to be working okay, let's go for it for real.
+If everything seems to be working okay, let's go for it and deploy our code for real!
 
 <pre>
 cap deploy
 </pre>
 
-Everything should go smoothly this time, the last line of the output should state something like:
+Everything should go smoothly this time, the last line of the output will probably state something like:
 
 <pre>
 `deploy:migrate' is only run for servers matching {:roles=>:db, :only=>{:primary=>true}}, but no servers matched
 </pre>
 
-Which is okay for us right now, since we don't have a database. Let's login to our server and see if Capistrano did it's job.
+But that's okay for us right now, we don't have a database setup yet! Let's login to our server and see if Capistrano did it's job.
 
 <pre>
 cd /var/www/blog
