@@ -6,6 +6,10 @@ category: development
 tags: ['ruby', 'ubuntu', 'aws']
 ---
 
+<div class='leader_note'>
+	This is post 1 of 2, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Skip to part 2 &rarr;</a>
+</div>
+
 If you haven't deployed a Ruby application on Amazon Web Services EC2 yet, you're really missing out. It's largely a simple and enjoyable process. I'm always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.
 
 ## Provisioning the Server on EC2
@@ -59,7 +63,7 @@ Next, let's get some of the basic packages that we'll need installed, this will 
 sudo apt-get install git build-essential
 </pre>
 
-So to clear things up, that'll install Git, and the complication tools you'll need to build the other packages, like GCC.
+So to clear things up, that'll install Git, and the complication tools, like GCC, that you'll need to build the other packages.
 
 ## Installing Ruby
 
@@ -85,3 +89,7 @@ ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 </pre>
 
 There you go! If the version is `ruby 1.9.3p0` or newer, you're all setup.
+
+<div class='leader_note'>
+	This is post 1 of 2, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Go to part 2 &rarr;</a>
+</div>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+  <title>Deploying a Rails Application on Amazon EC2</title>
+  <meta name="author" content="Joseph Silvashy">
+  <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
+
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/prettify.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1><a href="/">Joseph Silvashy</a></h1>
+      <p>Building web applications and businesses.</p>
+    </header>
+
+    <section>
+      <div id="post">
+  <h1>Deploying a Rails Application on Amazon EC2</h1>
+  <p class="meta"></p>
+
+  <div class='leader_note'>
+	This is post 2 of 2, in my series on deploying Rails applications. <a href='/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/'>Go to part 1 &rarr;</a>
+</div>
+<p>This is a continuation of my previous blog post <a href='/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/'>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a>, I realize that a lot of people have experience with Amazon EC2 so I decided to break it into several parts, that way if you&#8217;re already comfortable navigating AWS&#8217;s menus, you can zip through or just skip the first part.</p>
+
+<p>Let&#8217;s jump right in. We&#8217;re going to deploy our rails app using <a href='https://github.com/capistrano/capistrano'>Capistrano</a>. So in your local rails app, let&#8217;s get capistrano setup. Let&#8217;s add <code>capistrano</code>, to our <code>Gemfile</code> in our application.</p>
+<pre>
+gem 'capistrano'
+</pre>
+<p>Run the <code>bundle</code> command to update your bundle file, we&#8217;ll talk more about Bundler and the Gemfile later on but for now it&#8217;s important to just look at it as a dependency manager for your app.</p>
+<pre>
+bundle
+</pre>
+<p>Next we need to use Capistrano&#8217;s <code>capify</code> command to generate the files that we&#8217;ll need to get the app deployed on our server.</p>
+<pre>
+$ capify .
+[add] writing './Capfile'
+[add] writing './config/deploy.rb'
+</pre>
+<p>So you&#8217;ll see that it created two files, we&#8217;ll be focusing on <code>deploy.rb</code> for now.</p>
+
+<p>Open up your terminal and SSH to your machine.</p>
+<pre>
+ssh ubuntu@50.11.131.12
+</pre>
+<p>First things first, lets make sure we have some basic stuff, you&#8217;ll need to have <code>(bundler)[http://gembundler.com]</code> installed, this is really the only gem we&#8217;ll install this way, as Bundler itself will manage all our other gems.</p>
+<pre>
+sudo gem install bundler
+</pre>
+<p>Make sure you have the <code>bundle</code> binary available from your shell.</p>
+<pre>
+$ bundle -v
+Bundler version 1.1.5
+</pre>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+	  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
+    
+  </ul>
+</div>
+    </section>
+
+    <footer>
+      <p>Follow me on <a href="http://github.com/jpsilvashy">Github</a>, <a href="http://twitter.com/jpsilvashy">Twitter</a>, and <a href="http://stackoverflow.com/users/103739/joseph-silvashy">Stack Overflow</a>. Fork my blog on <a href="http://github.com/jpsilvashy/jpsilvashy.github.com">Github</a>.</p>
+    </footer>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="/javascripts/scale.fix.js"></script>
+  <script src="/javascripts/prettify.js"></script>
+  <script src="/javascripts/main.js"></script>
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-33729498-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+</body>
+</html>

@@ -62,19 +62,23 @@ blockquote {
   font-style:italic;
 }
 
+code {
+  padding: 0 2px;
+}
+
 code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  color:#353e40;
-  font-size:12px;
-  text-shadow:0 1px 0 white;
+  font-family: Monaco,​Consolas,​'Courier New',​Courier,​monospace;
+  color:black;
+  font-size: 12px;
 }
 
 pre {
-  padding:9px 16px;
-  background: #f5f9fa;
-  border-radius:1px;
-  border:1px solid #dde9eb;
+  color:white;
+  padding:10px 16px;
+  background: #2E3034;
+  border-radius:3px;
   overflow-x: auto;
+  text-shadow:0 1px 0 black;
 }
 
 table {
@@ -107,6 +111,10 @@ header {
   position:fixed;
 }
 
+header h1 {
+  margin-bottom: 8px;
+}
+
 strong {
   color:#222;
   font-weight:700;
@@ -117,6 +125,19 @@ section {
   float:right;
   padding-bottom:50px;
 }
+
+.leader_note {
+  color:#7d7a64;
+  text-shadow:0 1px 0 white;
+  padding:10px 16px;
+  background: #fffce5;
+  border:1px solid #fcf9e1;
+  border-bottom:1px solid #f2eece;
+  border-radius:3px;
+  overflow-x: auto;
+  margin-bottom:1em;
+}
+
 
 small {
   font-size:11px;
@@ -133,7 +154,7 @@ footer {
   width:270px;
   float:left;
   position:fixed;
-  bottom:50px;
+  bottom:30px;
 }
 
 @media print, screen and (max-width: 960px) {

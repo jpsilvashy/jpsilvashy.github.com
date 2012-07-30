@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-29T22:44:37-07:00</updated>
+ <updated>2012-07-30T00:17:16-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -13,11 +13,55 @@
 
  
  <entry>
+   <title>Deploying a Rails Application on Amazon EC2</title>
+   <link href="http://jpsilvashy.com/posts/deploying-a-rails-application-on-amazon-ec2"/>
+   <updated>2012-07-30T00:00:00-07:00</updated>
+   <id>http://jpsilvashy.com/posts/deploying-a-rails-application-on-amazon-ec2</id>
+   <content type="html">&lt;div class='leader_note'&gt;
+	This is post 2 of 2, in my series on deploying Rails applications. &lt;a href='/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/'&gt;Go to part 1 &amp;rarr;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;This is a continuation of my previous blog post &lt;a href='/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/'&gt;Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2&lt;/a&gt;, I realize that a lot of people have experience with Amazon EC2 so I decided to break it into several parts, that way if you&amp;#8217;re already comfortable navigating AWS&amp;#8217;s menus, you can zip through or just skip the first part.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#8217;s jump right in. We&amp;#8217;re going to deploy our rails app using &lt;a href='https://github.com/capistrano/capistrano'&gt;Capistrano&lt;/a&gt;. So in your local rails app, let&amp;#8217;s get capistrano setup. Let&amp;#8217;s add &lt;code&gt;capistrano&lt;/code&gt;, to our &lt;code&gt;Gemfile&lt;/code&gt; in our application.&lt;/p&gt;
+&lt;pre&gt;
+gem 'capistrano'
+&lt;/pre&gt;
+&lt;p&gt;Run the &lt;code&gt;bundle&lt;/code&gt; command to update your bundle file, we&amp;#8217;ll talk more about Bundler and the Gemfile later on but for now it&amp;#8217;s important to just look at it as a dependency manager for your app.&lt;/p&gt;
+&lt;pre&gt;
+bundle
+&lt;/pre&gt;
+&lt;p&gt;Next we need to use Capistrano&amp;#8217;s &lt;code&gt;capify&lt;/code&gt; command to generate the files that we&amp;#8217;ll need to get the app deployed on our server.&lt;/p&gt;
+&lt;pre&gt;
+$ capify .
+[add] writing './Capfile'
+[add] writing './config/deploy.rb'
+&lt;/pre&gt;
+&lt;p&gt;So you&amp;#8217;ll see that it created two files, we&amp;#8217;ll be focusing on &lt;code&gt;deploy.rb&lt;/code&gt; for now.&lt;/p&gt;
+
+&lt;p&gt;Open up your terminal and SSH to your machine.&lt;/p&gt;
+&lt;pre&gt;
+ssh ubuntu@50.11.131.12
+&lt;/pre&gt;
+&lt;p&gt;First things first, lets make sure we have some basic stuff, you&amp;#8217;ll need to have &lt;code&gt;(bundler)[http://gembundler.com]&lt;/code&gt; installed, this is really the only gem we&amp;#8217;ll install this way, as Bundler itself will manage all our other gems.&lt;/p&gt;
+&lt;pre&gt;
+sudo gem install bundler
+&lt;/pre&gt;
+&lt;p&gt;Make sure you have the &lt;code&gt;bundle&lt;/code&gt; binary available from your shell.&lt;/p&gt;
+&lt;pre&gt;
+$ bundle -v
+Bundler version 1.1.5
+&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</title>
    <link href="http://jpsilvashy.com/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2"/>
    <updated>2012-07-29T00:00:00-07:00</updated>
    <id>http://jpsilvashy.com/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2</id>
-   <content type="html">&lt;p&gt;If you haven&amp;#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&amp;#8217;re really missing out. It&amp;#8217;s largely a simple and enjoyable process. I&amp;#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.&lt;/p&gt;
+   <content type="html">&lt;div class='leader_note'&gt;
+	This is post 1 of 2, in my series on deploying Rails applications. &lt;a href='/posts/deploying-a-rails-application-on-amazon-ec2/'&gt;Skip to part 2 &amp;rarr;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;If you haven&amp;#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&amp;#8217;re really missing out. It&amp;#8217;s largely a simple and enjoyable process. I&amp;#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.&lt;/p&gt;
 
 &lt;h2 id='provisioning_the_server_on_ec2'&gt;Provisioning the Server on EC2&lt;/h2&gt;
 
@@ -60,7 +104,7 @@ sudo apt-get upgrade
 &lt;pre&gt;
 sudo apt-get install git build-essential
 &lt;/pre&gt;
-&lt;p&gt;So to clear things up, that&amp;#8217;ll install Git, and the complication tools you&amp;#8217;ll need to build the other packages, like GCC.&lt;/p&gt;
+&lt;p&gt;So to clear things up, that&amp;#8217;ll install Git, and the complication tools, like GCC, that you&amp;#8217;ll need to build the other packages.&lt;/p&gt;
 
 &lt;h2 id='installing_ruby'&gt;Installing Ruby&lt;/h2&gt;
 
@@ -79,7 +123,10 @@ sudo apt-get install ruby1.9.1
 $ ruby -v
 ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 &lt;/pre&gt;
-&lt;p&gt;There you go! If the version is &lt;code&gt;ruby 1.9.3p0&lt;/code&gt; or newer, you&amp;#8217;re all setup.&lt;/p&gt;</content>
+&lt;p&gt;There you go! If the version is &lt;code&gt;ruby 1.9.3p0&lt;/code&gt; or newer, you&amp;#8217;re all setup.&lt;/p&gt;
+&lt;div class='leader_note'&gt;
+	This is post 1 of 2, in my series on deploying Rails applications. &lt;a href='/posts/deploying-a-rails-application-on-amazon-ec2/'&gt;Go to part 2 &amp;rarr;&lt;/a&gt;
+&lt;/div&gt;</content>
  </entry>
  
 

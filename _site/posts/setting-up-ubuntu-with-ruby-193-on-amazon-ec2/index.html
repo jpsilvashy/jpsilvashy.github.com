@@ -27,7 +27,10 @@
   <h1>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</h1>
   <p class="meta"></p>
 
-  <p>If you haven&#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&#8217;re really missing out. It&#8217;s largely a simple and enjoyable process. I&#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.</p>
+  <div class='leader_note'>
+	This is post 1 of 2, in my series on deploying Rails applications. <a href='/posts/deploying-a-rails-application-on-amazon-ec2/'>Skip to part 2 &rarr;</a>
+</div>
+<p>If you haven&#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&#8217;re really missing out. It&#8217;s largely a simple and enjoyable process. I&#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.</p>
 
 <h2 id='provisioning_the_server_on_ec2'>Provisioning the Server on EC2</h2>
 
@@ -70,7 +73,7 @@ sudo apt-get upgrade
 <pre>
 sudo apt-get install git build-essential
 </pre>
-<p>So to clear things up, that&#8217;ll install Git, and the complication tools you&#8217;ll need to build the other packages, like GCC.</p>
+<p>So to clear things up, that&#8217;ll install Git, and the complication tools, like GCC, that you&#8217;ll need to build the other packages.</p>
 
 <h2 id='installing_ruby'>Installing Ruby</h2>
 
@@ -90,11 +93,16 @@ $ ruby -v
 ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 </pre>
 <p>There you go! If the version is <code>ruby 1.9.3p0</code> or newer, you&#8217;re all setup.</p>
+<div class='leader_note'>
+	This is post 1 of 2, in my series on deploying Rails applications. <a href='/posts/deploying-a-rails-application-on-amazon-ec2/'>Go to part 2 &rarr;</a>
+</div>
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
+    
+	  <li><a href="/posts/deploying-a-rails-application-on-amazon-ec2">Deploying a Rails Application on Amazon EC2</a> &mdash; 30 Jul 2012</li>
     
   </ul>
 </div>
