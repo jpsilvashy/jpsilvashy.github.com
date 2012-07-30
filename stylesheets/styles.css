@@ -64,15 +64,16 @@ blockquote {
 
 code, pre {
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  color:#333;
+  color:#353e40;
   font-size:12px;
+  text-shadow:0 1px 0 white;
 }
 
 pre {
-  padding:8px 15px;
-  background: #f8f8f8;
-  border-radius:5px;
-  border:1px solid #e5e5e5;
+  padding:9px 16px;
+  background: #f5f9fa;
+  border-radius:1px;
+  border:1px solid #dde9eb;
   overflow-x: auto;
 }
 
