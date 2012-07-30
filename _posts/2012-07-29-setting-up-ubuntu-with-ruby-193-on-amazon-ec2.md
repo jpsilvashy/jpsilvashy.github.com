@@ -30,7 +30,6 @@ Next click Instances in the navigation menu, and take a look at your instance, i
 
 Now fire up your terminal. Let's first configure our SSH client so we don't have to provide our credentials all the time. I usually keep all my key files in the same directory. So open up `~/.ssh/config`, mine looks like this for our blog project:
 
-
 <pre class="prettyprint">
 Host 50.11.131.12
   User ubuntu
@@ -51,24 +50,41 @@ ssh ubuntu@50.11.131.12
 
 Okay, you should be logged into the server now! Good job! Now it's time to get our hands dirty. We'll be using `apt-get`, to setup most of the packages we'll need. Let's first make sure we have all the latest updates for Ubuntu.
 
-```
+<pre class="prettyprint">
 sudo apt-get update
 sudo apt-get upgrade
-```
+</pre>
 
 Next, let's get some of the basic packages that we'll need installed, this will help with the remainder of the setup.
 
-```
+<pre class="prettyprint">
 sudo apt-get install git build essentials
-```
+</pre>
 
 So to clear things up, that'll install Git, and the complication tools you'll need to build the other packages, like GCC.
 
+## Installing Ruby
 
+Lastly, we'll need to get Ruby setup, but before we can actually install Ruby there are a few basic libraries that you are likely to need.
 
+<pre class="prettyprint">
+sudo apt-get install openssl libreadline6 libreadline6-dev \
+zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
+libxslt-dev autoconf libc6-dev ncurses-dev
+</pre>
 
+That takes care of the basic dependencies, now we'll install Ruby **1.9.3**, now this point is really important, even thoght the package name in the apt repository is "ruby1.9.1", you'll actually install Ruby 1.9.3. The reason it's named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.
 
+<pre class="prettyprint">
+sudo apt-get install ruby1.9.1
+</pre>
 
+Lastly, be sure you have the currect version:
+
+<pre class="prettyprint">
+$ ruby -v
+ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
+</pre>
 
 
 
