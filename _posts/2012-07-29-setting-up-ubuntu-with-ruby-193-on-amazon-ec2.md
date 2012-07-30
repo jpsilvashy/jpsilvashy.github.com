@@ -60,10 +60,10 @@ sudo apt-get upgrade
 Next, let's get some of the basic packages that we'll need installed, this will help with the remainder of the setup.
 
 <pre>
-sudo apt-get install git build-essential
+sudo apt-get install build-essential
 </pre>
 
-So to clear things up, that'll install Git, and the complication tools, like GCC, that you'll need to build the other packages.
+So to clear things up, that'll install the complication tools, like GCC for example, apt will need these to build the other packages.
 
 ## Installing Ruby
 
