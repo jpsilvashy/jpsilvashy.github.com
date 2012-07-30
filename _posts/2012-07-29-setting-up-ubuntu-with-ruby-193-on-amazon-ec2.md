@@ -14,13 +14,11 @@ Head over to [aws.amazon.com](http://aws.amazon.com) to get started. Log-in then
 
 I typically choose to launch a Small Instance (m1.small) when I'm just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you'll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I'd probably bump the size of the volume up accordingly.
 
-Click Continue again, leave a name for your instance, I'm naming mine blog, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we'll name it blog, and download the key pair, don't lose this file, it'll probably be named blog.pem. Click continue.
+Click Continue again, leave a name for your instance, I'm naming mine `blog`, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we'll name it `blog`, and download the key pair, don't lose this file, it'll probably be named `blog.pem`. Click continue.
 
-Create a new Security Group. Let's just name it the same as the instance, blog (you're also required to leave a description).
+Create a new Security Group. Let's just name it the same as the instance, blog (you're also required to leave a description). Since we'll be using a web server (HTTP), we'll need port `80` open, as well as `22` so we can SSH to the server.
 
-Since we'll be using a web server (HTTP), we'll need port 80 open, as well as 22 so we can SSH to the server. Click continue again.
-
-So this last step is just a summary of the instance, if everything looks good, launch it!
+The last page of the setup process is just a summary of the instance that's about to be provisioned, if everything looks good, *launch it!*
 
 Before we get started let's assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance. 
 
@@ -42,7 +40,7 @@ Lastly before you can SSH to your new server change the permissions of the key p
 chmod 600 /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
 </pre>
 
-Next, SSH to the server as the "ubuntu" user.
+Next, SSH to the server as the `ubuntu` user.
 
 <pre class="prettyprint">
 ssh ubuntu@50.11.131.12
@@ -73,7 +71,7 @@ zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
 libxslt-dev autoconf libc6-dev ncurses-dev
 </pre>
 
-That takes care of the basic dependencies, now we'll install Ruby **1.9.3**, now this point is really important, even thoght the package name in the apt repository is "ruby1.9.1", you'll actually install Ruby 1.9.3. The reason it's named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.
+That takes care of the basic dependencies, now we'll install Ruby **1.9.3**, now this point is really important, even thoght the package name in the apt repository is `ruby1.9.1`, you'll actually install Ruby 1.9.3. The reason it's named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.
 
 <pre class="prettyprint">
 sudo apt-get install ruby1.9.1
@@ -86,13 +84,4 @@ $ ruby -v
 ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 </pre>
 
-
-
-
-
-
-
-
-
-
-
+There you go! If the version is `ruby 1.9.3p0` or newer, you're all setup.

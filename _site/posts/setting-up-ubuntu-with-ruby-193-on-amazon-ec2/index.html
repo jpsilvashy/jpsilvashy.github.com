@@ -19,7 +19,7 @@
   <div class="wrapper">
     <header>
       <h1><a href="/">Joseph Silvashy</a></h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <p>Building web applications and buisnesses.</p>
     </header>
 
     <section>
@@ -35,13 +35,11 @@
 
 <p>I typically choose to launch a Small Instance (m1.small) when I&#8217;m just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you&#8217;ll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I&#8217;d probably bump the size of the volume up accordingly.</p>
 
-<p>Click Continue again, leave a name for your instance, I&#8217;m naming mine blog, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&#8217;ll name it blog, and download the key pair, don&#8217;t lose this file, it&#8217;ll probably be named blog.pem. Click continue.</p>
+<p>Click Continue again, leave a name for your instance, I&#8217;m naming mine <code>blog</code>, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&#8217;ll name it <code>blog</code>, and download the key pair, don&#8217;t lose this file, it&#8217;ll probably be named <code>blog.pem</code>. Click continue.</p>
 
-<p>Create a new Security Group. Let&#8217;s just name it the same as the instance, blog (you&#8217;re also required to leave a description).</p>
+<p>Create a new Security Group. Let&#8217;s just name it the same as the instance, blog (you&#8217;re also required to leave a description). Since we&#8217;ll be using a web server (HTTP), we&#8217;ll need port <code>80</code> open, as well as <code>22</code> so we can SSH to the server.</p>
 
-<p>Since we&#8217;ll be using a web server (HTTP), we&#8217;ll need port 80 open, as well as 22 so we can SSH to the server. Click continue again.</p>
-
-<p>So this last step is just a summary of the instance, if everything looks good, launch it!</p>
+<p>The last page of the setup process is just a summary of the instance that&#8217;s about to be provisioned, if everything looks good, <em>launch it!</em></p>
 
 <p>Before we get started let&#8217;s assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance.</p>
 
@@ -59,7 +57,7 @@ Host 50.11.131.12
 <pre class='prettyprint'>
 chmod 600 /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
 </pre>
-<p>Next, SSH to the server as the &#8220;ubuntu&#8221; user.</p>
+<p>Next, SSH to the server as the <code>ubuntu</code> user.</p>
 <pre class='prettyprint'>
 ssh ubuntu@50.11.131.12
 </pre>
@@ -82,7 +80,7 @@ sudo apt-get install openssl libreadline6 libreadline6-dev \
 zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
 libxslt-dev autoconf libc6-dev ncurses-dev
 </pre>
-<p>That takes care of the basic dependencies, now we&#8217;ll install Ruby <strong>1.9.3</strong>, now this point is really important, even thoght the package name in the apt repository is &#8220;ruby1.9.1&#8221;, you&#8217;ll actually install Ruby 1.9.3. The reason it&#8217;s named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.</p>
+<p>That takes care of the basic dependencies, now we&#8217;ll install Ruby <strong>1.9.3</strong>, now this point is really important, even thoght the package name in the apt repository is <code>ruby1.9.1</code>, you&#8217;ll actually install Ruby 1.9.3. The reason it&#8217;s named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.</p>
 <pre class='prettyprint'>
 sudo apt-get install ruby1.9.1
 </pre>
@@ -91,6 +89,7 @@ sudo apt-get install ruby1.9.1
 $ ruby -v
 ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 </pre>
+<p>There you go! If the version is <code>ruby 1.9.3p0</code> or newer, you&#8217;re all setup.</p>
 </div>
 
 <div id="related">
