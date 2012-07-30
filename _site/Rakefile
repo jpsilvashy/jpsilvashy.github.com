@@ -46,8 +46,17 @@ end # task :post
 
 desc "Launch preview environment"
 task :preview do
+  puts "=> Starting SASS watchers"  
+
+  # start up SASS watcher, but catch any INT signals and kill it.
+  sass_pid = spawn("sass --watch stylesheets/sass:stylesheets/compiled")  
+  Signal.trap("INT") do
+    Process.kill("USR1", sass_pid)
+  end
+
+  puts "=> Starting Jekyll watchers"  
   system "jekyll --auto --server"
-end # task :preview
+end
 
 def get_stdin(message)
   print message
