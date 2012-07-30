@@ -6,7 +6,7 @@ category:
 tags: []
 ---
 
-<div class='leader_note'>
+<div class='callout'>
 	This is part 2 of 3, in my series on deploying Rails applications.
 </div>
 
@@ -52,16 +52,18 @@ Also remember we're just using the `ubuntu` user, in a more serious situation I'
 set :user, "ubuntu"
 </pre>
 
-Since, in our case, the server will house the application itself, the webserver, and the database, we have to tell capistrano that all our tasks related to deploying these services are on the same server, let's just say the domain name we have is "my_cat_blog.com", you could also use your IP address as a string here. We'll also add the path to where the app should be `deployed_to`.
+Since, in our case, the server will house the application itself, the webserver, and the database, we have to tell capistrano that all our tasks related to deploying these services are on the same server. For now since we don't have our web server or database setup, just leave that value as `:app`, later on we'll add `:web`, and `:db`.
+
+Additionally we need to provide a hostname, let's just say the domain name we have is "my_cat_blog.com", you could also use your IP address as a string here. We'll also add the path to where the app should be `deployed_to`.
 
 <pre class="prettyprint lang-ruby">
-server "my_cat_blog.com", :app, :web, :db, :primary => true
+server "my_cat_blog.com", :app, :primary => true
 set :deploy_to, "/var/www/blog"
 </pre>
 
 [Here is the complete `deploy.rb`](https://gist.github.com/3205604). Remeber to update the variables to match your servers hostname or IP address.
 
-## Testing Out Our Deploy Recipe
+## Testing Our Deploy Recipe
 
 Let's see if our recipe works! From your project root on your local machine, run:
 
@@ -156,4 +158,33 @@ Now let's go back to our local computer and try to deploy our application code t
 cap deploy:cold
 </pre>
 
+The output should scroll by as though it were deploying the app and cloning the repository to the server.
 
+<div class="callout tip">
+	If you receive the error <code>Host key verification failed</code>, you might want to SSH to the remote machine and try cloning your repository from there first, this will ask you if you want to add Github to your list of known hosts. Choose yes, hopefully that solves the issue.
+</div>
+
+If everything seems to be working okay, let's go for it for real.
+
+<pre>
+cap deploy
+</pre>
+
+Everything should go smoothly this time, the last line of the output should state something like:
+
+<pre>
+`deploy:migrate' is only run for servers matching {:roles=>:db, :only=>{:primary=>true}}, but no servers matched
+</pre>
+
+Which is okay for us right now, since we don't have a database. Let's login to our server and see if Capistrano did it's job. 
+
+<pre>
+cd /var/www/blog
+ls -la
+
+lrwxrwxrwx 1 ubuntu ubuntu   37 Jul 30 09:01 current -> /var/www/blog/releases/20120730090056
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jul 30 09:00 releases
+drwxrwxr-x 5 ubuntu ubuntu 4096 Jul 30 07:37 shared
+</pre>
+
+So you'll notice that the `current` directory is actually just a symlink to a timestamped folder name, this allows Capistrano to rollback to previously deployed code in case something goes wrong during the deployment.

@@ -6,7 +6,7 @@ category: development
 tags: ['ruby', 'ubuntu', 'aws']
 ---
 
-<div class='leader_note'>
+<div class='callout'>
 	This is part 1 of 3, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Skip to part 2 &rarr;</a>
 </div>
 
@@ -90,6 +90,6 @@ ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
 
 There you go! If the version is `ruby 1.9.3p0` or newer, you're all setup.
 
-<div class='leader_note'>
+<div class='callout'>
 	This is post 1 of 2, in my series on deploying Rails applications. <a href="/posts/deploying-a-rails-application-on-amazon-ec2/">Go to part 2 &rarr;</a>
 </div>

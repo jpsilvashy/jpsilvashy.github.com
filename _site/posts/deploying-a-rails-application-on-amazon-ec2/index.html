@@ -27,7 +27,7 @@
   <h1>Deploying a Rails Application on Amazon EC2</h1>
   <p class="meta"></p>
 
-  <div class='leader_note'>
+  <div class='callout'>
 	This is part 2 of 3, in my series on deploying Rails applications.
 </div>
 <p>This is a continuation of my previous blog post <a href='/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2/'>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a>, I realize that a lot of people have experience with Amazon EC2 so I decided to break it into several parts, that way if you&#8217;re already comfortable navigating AWS&#8217;s menus, you can zip through or just skip the first part.</p>
@@ -60,14 +60,16 @@ set :scm_passphrase, ""
 <pre class='prettyprint lang-ruby'>
 set :user, "ubuntu"
 </pre>
-<p>Since, in our case, the server will house the application itself, the webserver, and the database, we have to tell capistrano that all our tasks related to deploying these services are on the same server, let&#8217;s just say the domain name we have is &#8220;my_cat_blog.com&#8221;, you could also use your IP address as a string here. We&#8217;ll also add the path to where the app should be <code>deployed_to</code>.</p>
+<p>Since, in our case, the server will house the application itself, the webserver, and the database, we have to tell capistrano that all our tasks related to deploying these services are on the same server. For now since we don&#8217;t have our web server or database setup, just leave that value as <code>:app</code>, later on we&#8217;ll add <code>:web</code>, and <code>:db</code>.</p>
+
+<p>Additionally we need to provide a hostname, let&#8217;s just say the domain name we have is &#8220;my_cat_blog.com&#8221;, you could also use your IP address as a string here. We&#8217;ll also add the path to where the app should be <code>deployed_to</code>.</p>
 <pre class='prettyprint lang-ruby'>
-server "my_cat_blog.com", :app, :web, :db, :primary => true
+server "my_cat_blog.com", :app, :primary => true
 set :deploy_to, "/var/www/blog"
 </pre>
 <p><a href='https://gist.github.com/3205604'>Here is the complete <code>deploy.rb</code></a>. Remeber to update the variables to match your servers hostname or IP address.</p>
 
-<h2 id='testing_out_our_deploy_recipe'>Testing Out Our Deploy Recipe</h2>
+<h2 id='testing_our_deploy_recipe'>Testing Our Deploy Recipe</h2>
 
 <p>Let&#8217;s see if our recipe works! From your project root on your local machine, run:</p>
 <pre>
@@ -141,6 +143,28 @@ cat /home/ubuntu/.ssh/id_rsa.pub
 <pre>
 cap deploy:cold
 </pre>
+<p>The output should scroll by as though it were deploying the app and cloning the repository to the server.</p>
+<div class='callout tip'>
+	If you receive the error <code>Host key verification failed</code>, you might want to SSH to the remote machine and try cloning your repository from there first, this will ask you if you want to add Github to your list of known hosts. Choose yes, hopefully that solves the issue.
+</div>
+<p>If everything seems to be working okay, let&#8217;s go for it for real.</p>
+<pre>
+cap deploy
+</pre>
+<p>Everything should go smoothly this time, the last line of the output should state something like:</p>
+<pre>
+`deploy:migrate' is only run for servers matching {:roles=>:db, :only=>{:primary=>true}}, but no servers matched
+</pre>
+<p>Which is okay for us right now, since we don&#8217;t have a database. Let&#8217;s login to our server and see if Capistrano did it&#8217;s job.</p>
+<pre>
+cd /var/www/blog
+ls -la
+
+lrwxrwxrwx 1 ubuntu ubuntu   37 Jul 30 09:01 current -> /var/www/blog/releases/20120730090056
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jul 30 09:00 releases
+drwxrwxr-x 5 ubuntu ubuntu 4096 Jul 30 07:37 shared
+</pre>
+<p>So you&#8217;ll notice that the <code>current</code> directory is actually just a symlink to a timestamped folder name, this allows Capistrano to rollback to previously deployed code in case something goes wrong during the deployment.</p>
 </div>
 
 <div id="related">
