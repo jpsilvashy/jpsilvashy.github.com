@@ -10,7 +10,7 @@ If you haven't deployed a Ruby application on Amazon Web Services EC2 yet, you'r
 
 ## Provisioning the Server on EC2
 
-Head over to [aws.amazon.com](http://aws.amazon.com) to get started. Log-in then go to the [EC2 panel](https://console.aws.amazon.com/ec2/), click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we'll use that one). LTS (Long Term Support) releases are always the better choice because the'll receive security and bug fixes for 5 years.
+Head over to [aws.amazon.com](http://aws.amazon.com) to get started. Log-in then go to the [EC2 panel](https://console.aws.amazon.com/ec2/), click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we'll use that one). LTS (Long Term Support) releases are always the better choice because they'll receive security and bug fixes for 5 years.
 
 I typically choose to launch a Small Instance (m1.small) when I'm just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you'll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I'd probably bump the size of the volume up accordingly.
 
@@ -71,7 +71,7 @@ zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev \
 libxslt-dev autoconf libc6-dev ncurses-dev
 </pre>
 
-That takes care of the basic dependencies, now we'll install Ruby **1.9.3**, now this point is really important, even thoght the package name in the apt repository is `ruby1.9.1`, you'll actually install Ruby 1.9.3. The reason it's named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.
+That takes care of the basic dependencies, now we'll install Ruby **1.9.3**, now this point is really important, even though the package name in the apt repository is `ruby1.9.1`, you'll actually install Ruby 1.9.3. The reason it's named this is a little complicated, but be rest-assured nothing is wrong here and this is the correct name of the package to you want to install.
 
 <pre>
 sudo apt-get install ruby1.9.1
