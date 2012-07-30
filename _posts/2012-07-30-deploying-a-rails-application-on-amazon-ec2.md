@@ -2,8 +2,8 @@
 layout: post
 title: Deploying a Rails Application on Amazon EC2
 date: 2012-07-30
-category: 
-tags: []
+category:
+tags: ['ruby', 'rails', 'ubuntu', 'aws']
 ---
 
 <div class='callout'>
@@ -84,7 +84,7 @@ The following dependencies failed. Please check them and try again:
 --> You do not have permissions to write to `/var/www/blog'. (50.11.131.12)
 --> You do not have permissions to write to `/var/www/blog/releases'. (50.11.131.12)
 --> `git' could not be found in the path (50.11.131.12)
-</pre>	
+</pre>
 
 Let's take care of fixing the permissions for those files first. SSH to your server.
 
@@ -176,7 +176,7 @@ Everything should go smoothly this time, the last line of the output should stat
 `deploy:migrate' is only run for servers matching {:roles=>:db, :only=>{:primary=>true}}, but no servers matched
 </pre>
 
-Which is okay for us right now, since we don't have a database. Let's login to our server and see if Capistrano did it's job. 
+Which is okay for us right now, since we don't have a database. Let's login to our server and see if Capistrano did it's job.
 
 <pre>
 cd /var/www/blog
