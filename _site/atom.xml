@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-17T18:54:25-07:00</updated>
+ <updated>2012-07-29T19:50:32-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -13,63 +13,60 @@
 
  
  <entry>
-   <title>hi dalton</title>
-   <link href="http://jpsilvashy.com/posts/hi-dalton"/>
-   <updated>2012-07-15T00:00:00-07:00</updated>
-   <id>http://jpsilvashy.com/posts/hi-dalton</id>
-   <content type="html">&lt;p&gt;Lorem &lt;a href='http://daltonjrooney.com'&gt;ipsum&lt;/a&gt; dolor sit amet, &lt;strong&gt;&lt;em&gt;consectetur&lt;/em&gt;&lt;/strong&gt; adipisicing elit, sed do eiusmod tempor incididunt ut &lt;strong&gt;labore&lt;/strong&gt; et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure &lt;em&gt;dolor&lt;/em&gt; in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+   <title>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</title>
+   <link href="http://jpsilvashy.com/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2"/>
+   <updated>2012-07-29T00:00:00-07:00</updated>
+   <id>http://jpsilvashy.com/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2</id>
+   <content type="html">&lt;p&gt;If you haven&amp;#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&amp;#8217;re really missing out. It&amp;#8217;s largely a simple and enjoyable process. I&amp;#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;item 1&lt;/li&gt;
+&lt;h2 id='provisioning_the_server_on_ec2'&gt;Provisioning the Server on EC2&lt;/h2&gt;
 
-&lt;li&gt;item 1&lt;/li&gt;
+&lt;p&gt;Head over to &lt;a href='http://aws.amazon.com'&gt;aws.amazon.com&lt;/a&gt; to get started. Log-in then go to the &lt;a href='https://console.aws.amazon.com/ec2/'&gt;EC2 panel&lt;/a&gt;, click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we&amp;#8217;ll use that one). LTS (Long Term Support) releases are always the better choice because the&amp;#8217;ll receive security and bug fixes for 5 years.&lt;/p&gt;
 
-&lt;li&gt;item 1&lt;/li&gt;
+&lt;p&gt;I typically choose to launch a Small Instance (m1.small) when I&amp;#8217;m just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you&amp;#8217;ll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I&amp;#8217;d probably bump the size of the volume up accordingly.&lt;/p&gt;
 
-&lt;li&gt;item 1&lt;/li&gt;
+&lt;p&gt;Click Continue again, leave a name for your instance, I&amp;#8217;m naming mine blog, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&amp;#8217;ll name it blog, and download the key pair, don&amp;#8217;t lose this file, it&amp;#8217;ll probably be named blog.pem. Click continue.&lt;/p&gt;
 
-&lt;li&gt;item 1&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Create a new Security Group. Let&amp;#8217;s just name it the same as the instance, blog (you&amp;#8217;re also required to leave a description).&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.&lt;/p&gt;
+&lt;p&gt;Since we&amp;#8217;ll be using a web server (HTTP), we&amp;#8217;ll need port 80 open, as well as 22 so we can SSH to the server. Click continue again.&lt;/p&gt;
 
-&lt;h2 id='title_2'&gt;Title 2&lt;/h2&gt;
+&lt;p&gt;So this last step is just a summary of the instance, if everything looks good, launch it!&lt;/p&gt;
 
-&lt;p&gt;consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;p&gt;Before we get started let&amp;#8217;s assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance.&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;lolol&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Next click Instances in the navigation menu, and take a look at your instance, it&amp;#8217;s state should now say &lt;strong&gt;running&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;h3 id='title_3'&gt;Title 3&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;slksdflkjhsdflkhjsdf Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>Hello World</title>
-   <link href="http://jpsilvashy.com/posts/hello-world"/>
-   <updated>2012-07-11T00:00:00-07:00</updated>
-   <id>http://jpsilvashy.com/posts/hello-world</id>
-   <content type="html">&lt;p&gt;Truffaut food truck mcsweeney&amp;#8217;s, Tattooed lomo godard, bushwick kogi brooklyn sustainable. Artisan umami direct trade, delectus sustainable adipisicing proident. Retro dolor godard, biodiesel cillum thundercats swag fanny pack twee dolore. Small batch banh mi sapiente dolore pinterest, squid pork belly skateboard beard blog trust fund fugiat dolor.&lt;/p&gt;
+&lt;h2 id='setting_up_the_server'&gt;Setting up the Server&lt;/h2&gt;
 
-&lt;p&gt;Nihil nesciunt raw denim, Direct trade single-origin coffee stumptown, helvetica adipisicing mustache 8-bit anim est quis nesciunt pitchfork excepteur dolore. Austin nihil godard odd future. Gentrify gluten-free laboris marfa cosby sweater. Non kale chips deserunt williamsburg. Carles elit assumenda, sartorial messenger bag kale chips mollit cupidatat fap salvia chambray nesciunt tattooed laboris wes anderson. Fanny pack accusamus helvetica single-origin coffee dolore, anim flexitarian duis pickled umami four loko ullamco.&lt;/p&gt;
+&lt;p&gt;Now fire up your terminal. Let&amp;#8217;s first configure our SSH client so we don&amp;#8217;t have to provide our credentials all the time. I usually keep all my key files in the same directory. So open up &lt;code&gt;~/.ssh/config&lt;/code&gt;, mine looks like this for our blog project:&lt;/p&gt;
+&lt;pre class='prettyprint'&gt;
+Host 50.11.131.12
+  User ubuntu
+  IdentityFile /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
+&lt;/pre&gt;
+&lt;p&gt;Lastly before you can SSH to your new server change the permissions of the key pair file to 600.&lt;/p&gt;
+&lt;pre class='prettyprint'&gt;
+chmod 600 /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
+&lt;/pre&gt;
+&lt;p&gt;Next, SSH to the server as the &amp;#8220;ubuntu&amp;#8221; user.&lt;/p&gt;
+&lt;pre class='prettyprint'&gt;
+ssh ubuntu@50.11.131.12
+&lt;/pre&gt;
+&lt;p&gt;Okay, you should be logged into the server now! Good job! Now it&amp;#8217;s time to get our hands dirty. We&amp;#8217;ll be using &lt;code&gt;apt-get&lt;/code&gt;, to setup most of the packages we&amp;#8217;ll need. Let&amp;#8217;s first make sure we have all the latest updates for Ubuntu.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Velit flexitarian tattooed, authentic&lt;/li&gt;
+&lt;p&gt;&lt;code&gt;
+sudo apt-get update
+sudo apt-get upgrade
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;li&gt;Pariatur craft beer wes anderson chillwave occaecat.&lt;/li&gt;
+&lt;p&gt;Next, let&amp;#8217;s get some of the basic packages that we&amp;#8217;ll need installed, this will help with the remainder of the setup.&lt;/p&gt;
 
-&lt;li&gt;Placeat nihil vice mlkshk, exercitation farm-to-table&lt;/li&gt;
+&lt;p&gt;&lt;code&gt;
+sudo apt-get install git build essentials
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;li&gt;Deserunt DIY excepteur wes anderson truffaut.&lt;/li&gt;
-
-&lt;li&gt;Mcsweeney&amp;#8217;s aute readymade, pariatur before they sold out.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;hella vegan vice leggings stumptown biodiesel. Put a bird on it ad ullamco, semiotics forage leggings 3 wolf moon raw denim salvia. Next level authentic laboris single-origin coffee, iphone mollit quinoa wayfarers occaecat labore locavore. Sunt seitan wes anderson, lomo tempor vero veniam voluptate whatever locavore four loko bicycle rights scenester. Ethnic wayfarers wolf, photo booth craft beer williamsburg sunt ennui.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Tattooed lomo godard, bushwick kogi brooklyn sustainable.&lt;/p&gt;</content>
+&lt;p&gt;So to clear things up, that&amp;#8217;ll install Git, and the complication tools you&amp;#8217;ll need to build the other packages, like GCC.&lt;/p&gt;</content>
  </entry>
  
 

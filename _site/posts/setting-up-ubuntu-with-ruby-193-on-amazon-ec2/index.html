@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+  <title>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</title>
+  <meta name="author" content="Joseph Silvashy">
+  <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
+
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/prettify.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1><a href="/">Joseph Silvashy</a></h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </header>
+
+    <section>
+      <div id="post">
+  <h1>Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</h1>
+  <p class="meta"></p>
+
+  <p>If you haven&#8217;t deployed a Ruby application on Amazon Web Services EC2 yet, you&#8217;re really missing out. It&#8217;s largely a simple and enjoyable process. I&#8217;m always impressed at how quickly servers can be provisioned on EC2. This is a guide on how I typically get a new project going on EC2.</p>
+
+<h2 id='provisioning_the_server_on_ec2'>Provisioning the Server on EC2</h2>
+
+<p>Head over to <a href='http://aws.amazon.com'>aws.amazon.com</a> to get started. Log-in then go to the <a href='https://console.aws.amazon.com/ec2/'>EC2 panel</a>, click Launch Instance. Choose the Classic Wizard, scroll and choose Ubuntu Server 12.04 LTS (Note that it selects the 64 bit version by default, we&#8217;ll use that one). LTS (Long Term Support) releases are always the better choice because the&#8217;ll receive security and bug fixes for 5 years.</p>
+
+<p>I typically choose to launch a Small Instance (m1.small) when I&#8217;m just getting a project started. A Small Instance will cost about $60/mo. Click continue, next you&#8217;ll be on the Storage Device Configuration, I typically leave the volume size at 8GiB. If my server is going to have some sort of persistent datastore, like MySQL or MongoDB, I&#8217;d probably bump the size of the volume up accordingly.</p>
+
+<p>Click Continue again, leave a name for your instance, I&#8217;m naming mine blog, and continue to the next step. I usually create a new key pair for each server just to have tighter control of access. It really depends on how your manage access to your servers. In our case, we&#8217;ll name it blog, and download the key pair, don&#8217;t lose this file, it&#8217;ll probably be named blog.pem. Click continue.</p>
+
+<p>Create a new Security Group. Let&#8217;s just name it the same as the instance, blog (you&#8217;re also required to leave a description).</p>
+
+<p>Since we&#8217;ll be using a web server (HTTP), we&#8217;ll need port 80 open, as well as 22 so we can SSH to the server. Click continue again.</p>
+
+<p>So this last step is just a summary of the instance, if everything looks good, launch it!</p>
+
+<p>Before we get started let&#8217;s assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance.</p>
+
+<p>Next click Instances in the navigation menu, and take a look at your instance, it&#8217;s state should now say <strong>running</strong>.</p>
+
+<h2 id='setting_up_the_server'>Setting up the Server</h2>
+
+<p>Now fire up your terminal. Let&#8217;s first configure our SSH client so we don&#8217;t have to provide our credentials all the time. I usually keep all my key files in the same directory. So open up <code>~/.ssh/config</code>, mine looks like this for our blog project:</p>
+<pre class='prettyprint'>
+Host 50.11.131.12
+  User ubuntu
+  IdentityFile /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
+</pre>
+<p>Lastly before you can SSH to your new server change the permissions of the key pair file to 600.</p>
+<pre class='prettyprint'>
+chmod 600 /Users/jpsilvashy/Projects/aws_keypairs/blog.pem
+</pre>
+<p>Next, SSH to the server as the &#8220;ubuntu&#8221; user.</p>
+<pre class='prettyprint'>
+ssh ubuntu@50.11.131.12
+</pre>
+<p>Okay, you should be logged into the server now! Good job! Now it&#8217;s time to get our hands dirty. We&#8217;ll be using <code>apt-get</code>, to setup most of the packages we&#8217;ll need. Let&#8217;s first make sure we have all the latest updates for Ubuntu.</p>
+
+<p><code>
+sudo apt-get update
+sudo apt-get upgrade
+</code></p>
+
+<p>Next, let&#8217;s get some of the basic packages that we&#8217;ll need installed, this will help with the remainder of the setup.</p>
+
+<p><code>
+sudo apt-get install git build essentials
+</code></p>
+
+<p>So to clear things up, that&#8217;ll install Git, and the complication tools you&#8217;ll need to build the other packages, like GCC.</p>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+  </ul>
+</div>
+    </section>
+
+    <footer>
+      <p>Follow me on <a href="http://github.com/jpsilvashy">Github</a>, <a href="http://twitter.com/jpsilvashy">Twitter</a>, and <a href="http://stackoverflow.com/users/103739/joseph-silvashy">Stack Overflow</a>. Fork my blog on <a href="http://github.com/jpsilvashy/jpsilvashy.github.com">Github</a>.</p>
+    </footer>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="/javascripts/scale.fix.js"></script>
+  <script src="/javascripts/prettify.js"></script>
+  <script src="/javascripts/main.js"></script>
+</body>
+</html>

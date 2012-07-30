@@ -1,1 +1,20 @@
-<h1>test</h1>
+<!doctype html>  
+<html lang="en">  
+  <head>  
+    <meta charset="utf-8">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://kiosk.gauge.io:3000/faye.js"></script>  
+    <script>
+      $(function() {
+        var faye = new Faye.Client('http://kiosk.gauge.io:3000/faye');
+        faye.subscribe("/messages/new", function(data) {
+          $("#output").append(data + "<br>");
+        });
+      });
+    </script>
+    <title></title>  
+  </head>  
+  <body>  
+    <div id="output"></div>
+  </body>  
+</html>
