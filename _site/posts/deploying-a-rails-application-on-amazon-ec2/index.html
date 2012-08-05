@@ -147,15 +147,15 @@ cap deploy:cold
 <div class='callout tip'>
 	If you receive the error <code>Host key verification failed</code>, you might want to SSH to the remote machine and try cloning your repository from there first, this will ask you if you want to add Github to your list of known hosts. Choose yes, hopefully that solves the issue.
 </div>
-<p>If everything seems to be working okay, let&#8217;s go for it for real.</p>
+<p>If everything seems to be working okay, let&#8217;s go for it and deploy our code for real!</p>
 <pre>
 cap deploy
 </pre>
-<p>Everything should go smoothly this time, the last line of the output should state something like:</p>
+<p>Everything should go smoothly this time, the last line of the output will probably state something like:</p>
 <pre>
 `deploy:migrate' is only run for servers matching {:roles=>:db, :only=>{:primary=>true}}, but no servers matched
 </pre>
-<p>Which is okay for us right now, since we don&#8217;t have a database. Let&#8217;s login to our server and see if Capistrano did it&#8217;s job.</p>
+<p>But that&#8217;s okay for us right now, we don&#8217;t have a database setup yet! Let&#8217;s login to our server and see if Capistrano did it&#8217;s job.</p>
 <pre>
 cd /var/www/blog
 ls -la
@@ -170,6 +170,8 @@ drwxrwxr-x 5 ubuntu ubuntu 4096 Jul 30 07:37 shared
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
+    
+	  <li><a href="/posts/chattyloo">Chattyloo</a> &mdash; 04 Aug 2012</li>
     
 	  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
     

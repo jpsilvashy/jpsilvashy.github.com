@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>Changing your hostname on Ubuntu</title>
+  <title>Chattyloo</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -24,42 +24,59 @@
 
     <section>
       <div id="post">
-  <h1>Changing your hostname on Ubuntu</h1>
+  <h1>Chattyloo</h1>
   <p class="meta"></p>
 
-  <p>If you&#8217;re using Amazon AWS, your instance will likely have a hostname which matches the initial hostname and IP issued when you provisioned your server.</p>
+  <p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names containing the work &#8220;chat&#8221;.</p>
 
-<p>So on your server you&#8217;ll need to update <code>/etc/hostname</code>.</p>
-<pre>
-sudo vi /etc/hostname
-</pre>
-<p>You&#8217;ll see there is only one line in this file, go ahead and change it to the new hostname you&#8217;d like.</p>
-<pre>
-myserver
-</pre>
-<p>Then you&#8217;ll also need to update <code>/etc/hosts</code>, under the first line which should look something like this, add your hostname and the localhost IP address.</p>
-<pre>
-127.0.0.1 localhost
-127.0.0.1 myserver
+<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
 
-...
-</pre>
-<p>Then I typically reboot the machine.</p>
+<p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
+
+<h2 id='usage'>Usage</h2>
+
+<p>First clone the repository:</p>
 <pre>
-sudo reboot
+git clone git@github.com:jpsilvashy/chattyloo.git
 </pre>
-<p>When you log back in use the command <code>hostname</code> to check that your changes have taken effect.</p>
+<p>Run the <code>bundle</code> command at the root of the project:</p>
+<pre>
+cd chattyloo/
+bundle
+</pre>
+<p>Then you should be able to start the server:</p>
+<pre>
+./chattyloo.rb
+</pre>
+<p>Then just go to <a href='http://localhost:4567'>localhost:4567</a>, and start chatting!</p>
+
+<h2 id='deploying_to_heroku'>Deploying to Heroku</h2>
+
+<p>You can deploy your own Chattyloo app! Here are the instructions for deploying to <a href='http://heroku.com'>Heroku</a>.</p>
+
+<p>First in the root creat a new heroku app:</p>
+<pre>
+heroku apps:create mychatapp
+</pre>
+<p>Then add the addon for the shared database, this will create a Postgres database with all the proper environment variables needed to connect to it.</p>
+<pre>
+heroku addons:add shared-database
+</pre>
+<p>Now deploy the app to the server and go check it out</p>
+<pre>
+git push heroku master
+</pre>
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
     
-	  <li><a href="/posts/chattyloo">Chattyloo</a> &mdash; 04 Aug 2012</li>
-    
 	  <li><a href="/posts/deploying-a-rails-application-on-amazon-ec2">Deploying a Rails Application on Amazon EC2</a> &mdash; 30 Jul 2012</li>
     
 	  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
+    
+	  <li><a href="/posts/changing-your-hostname-on-ubuntu">Changing your hostname on Ubuntu</a> &mdash; 20 Jun 2012</li>
     
   </ul>
 </div>

@@ -22,14 +22,14 @@ task :post do
   begin
     date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
   rescue Exception => e
-    puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
+    puts "=> Error - date format must be YYYY-MM-DD"
     exit -1
   end
 
   filename = File.join(CONFIG['posts'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
 
   if File.exist?(filename)
-    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'N']) == 'n'
   end
 
   puts "Creating new post: #{filename}"
@@ -42,13 +42,13 @@ task :post do
     post.puts "tags: []"
     post.puts "---"
   end
-end # task :post
+end
 
 desc "Launch preview environment"
 task :preview do
   puts "=> Starting SASS watchers"  
 
-  # start up SASS watcher, but catch any INT signals and kill it.
+  # Start up SASS watcher, but catch any INT signals and kill it.
   sass_pid = spawn("sass --watch stylesheets/sass:stylesheets/compiled")  
   Signal.trap("INT") do
     Process.kill("USR1", sass_pid)

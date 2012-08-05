@@ -4,13 +4,59 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-07-30T15:16:21-07:00</updated>
+ <updated>2012-08-05T00:09:18-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Chattyloo</title>
+   <link href="http://jpsilvashy.com/posts/chattyloo"/>
+   <updated>2012-08-04T00:00:00-07:00</updated>
+   <id>http://jpsilvashy.com/posts/chattyloo</id>
+   <content type="html">&lt;p&gt;Look, I know the name is stupid. There just aren&amp;#8217;t a lot of domains names containing the work &amp;#8220;chat&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.&lt;/p&gt;
+
+&lt;p&gt;It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.&lt;/p&gt;
+
+&lt;h2 id='usage'&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;First clone the repository:&lt;/p&gt;
+&lt;pre&gt;
+git clone git@github.com:jpsilvashy/chattyloo.git
+&lt;/pre&gt;
+&lt;p&gt;Run the &lt;code&gt;bundle&lt;/code&gt; command at the root of the project:&lt;/p&gt;
+&lt;pre&gt;
+cd chattyloo/
+bundle
+&lt;/pre&gt;
+&lt;p&gt;Then you should be able to start the server:&lt;/p&gt;
+&lt;pre&gt;
+./chattyloo.rb
+&lt;/pre&gt;
+&lt;p&gt;Then just go to &lt;a href='http://localhost:4567'&gt;localhost:4567&lt;/a&gt;, and start chatting!&lt;/p&gt;
+
+&lt;h2 id='deploying_to_heroku'&gt;Deploying to Heroku&lt;/h2&gt;
+
+&lt;p&gt;You can deploy your own Chattyloo app! Here are the instructions for deploying to &lt;a href='http://heroku.com'&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First in the root creat a new heroku app:&lt;/p&gt;
+&lt;pre&gt;
+heroku apps:create mychatapp
+&lt;/pre&gt;
+&lt;p&gt;Then add the addon for the shared database, this will create a Postgres database with all the proper environment variables needed to connect to it.&lt;/p&gt;
+&lt;pre&gt;
+heroku addons:add shared-database
+&lt;/pre&gt;
+&lt;p&gt;Now deploy the app to the server and go check it out&lt;/p&gt;
+&lt;pre&gt;
+git push heroku master
+&lt;/pre&gt;</content>
+ </entry>
  
  <entry>
    <title>Deploying a Rails Application on Amazon EC2</title>
@@ -137,15 +183,15 @@ cap deploy:cold
 &lt;div class='callout tip'&gt;
 	If you receive the error &lt;code&gt;Host key verification failed&lt;/code&gt;, you might want to SSH to the remote machine and try cloning your repository from there first, this will ask you if you want to add Github to your list of known hosts. Choose yes, hopefully that solves the issue.
 &lt;/div&gt;
-&lt;p&gt;If everything seems to be working okay, let&amp;#8217;s go for it for real.&lt;/p&gt;
+&lt;p&gt;If everything seems to be working okay, let&amp;#8217;s go for it and deploy our code for real!&lt;/p&gt;
 &lt;pre&gt;
 cap deploy
 &lt;/pre&gt;
-&lt;p&gt;Everything should go smoothly this time, the last line of the output should state something like:&lt;/p&gt;
+&lt;p&gt;Everything should go smoothly this time, the last line of the output will probably state something like:&lt;/p&gt;
 &lt;pre&gt;
 `deploy:migrate' is only run for servers matching {:roles=&gt;:db, :only=&gt;{:primary=&gt;true}}, but no servers matched
 &lt;/pre&gt;
-&lt;p&gt;Which is okay for us right now, since we don&amp;#8217;t have a database. Let&amp;#8217;s login to our server and see if Capistrano did it&amp;#8217;s job.&lt;/p&gt;
+&lt;p&gt;But that&amp;#8217;s okay for us right now, we don&amp;#8217;t have a database setup yet! Let&amp;#8217;s login to our server and see if Capistrano did it&amp;#8217;s job.&lt;/p&gt;
 &lt;pre&gt;
 cd /var/www/blog
 ls -la
