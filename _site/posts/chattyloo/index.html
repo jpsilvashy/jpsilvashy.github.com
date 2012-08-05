@@ -29,9 +29,11 @@
 
   <p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names available containing the word &#8220;chat&#8221;, so I&#8217;m stuck with this one!</p>
 
-<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
+<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
 
 <p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
+
+<p>Besides the fact that it&#8217;s very simple, the app does have a few bells and whistles. Firstly, different sounds play when chat messages are sent and received. Hearts and :)&#8217;s are automatically rotated using CSS3 transforms. Lastly, the title element displays a status message when new messages are received.</p>
 
 <h2 id='usage'>Usage</h2>
 

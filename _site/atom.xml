@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-08-05T00:12:46-07:00</updated>
+ <updated>2012-08-05T00:19:58-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -19,9 +19,11 @@
    <id>http://jpsilvashy.com/posts/chattyloo</id>
    <content type="html">&lt;p&gt;Look, I know the name is stupid. There just aren&amp;#8217;t a lot of domains names available containing the word &amp;#8220;chat&amp;#8221;, so I&amp;#8217;m stuck with this one!&lt;/p&gt;
 
-&lt;p&gt;&lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.&lt;/p&gt;
+&lt;p&gt;&lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.&lt;/p&gt;
 
 &lt;p&gt;It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.&lt;/p&gt;
+
+&lt;p&gt;Besides the fact that it&amp;#8217;s very simple, the app does have a few bells and whistles. Firstly, different sounds play when chat messages are sent and received. Hearts and :)&amp;#8217;s are automatically rotated using CSS3 transforms. Lastly, the title element displays a status message when new messages are received.&lt;/p&gt;
 
 &lt;h2 id='usage'&gt;Usage&lt;/h2&gt;
 
