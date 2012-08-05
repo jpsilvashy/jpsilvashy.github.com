@@ -6,8 +6,8 @@ category:
 tags: ['ruby', sinatra']
 ---
 
-Did you know you can open a console for your Sinatra apps just like you can with rails? You can do this though `irb` but send in the path to your app with the `-r-` parameter.
+Did you know you can open a console for your Sinatra apps just like you can with rails? You can do this through `irb` but send in the path to your app with the `-r` parameter.
 
 <pre>
- $ irb -r ./my_app.rb
+irb -r ./my_app.rb
 </pre>
