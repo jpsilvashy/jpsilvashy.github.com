@@ -6,7 +6,7 @@ category:
 tags: ['ruby', 'sinatra', 'heroku']
 ---
 
-Look, I know the name is stupid. There just aren't a lot of domains names containing the work "chat".
+Look, I know the name is stupid. There just aren't a lot of domains names available containing the word "chat", so I'm stuck with this one!
 
 [Chattyloo](http://chattyloo.com) is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.
 

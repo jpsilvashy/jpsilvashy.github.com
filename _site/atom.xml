@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-08-05T00:09:18-07:00</updated>
+ <updated>2012-08-05T00:12:46-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -17,7 +17,7 @@
    <link href="http://jpsilvashy.com/posts/chattyloo"/>
    <updated>2012-08-04T00:00:00-07:00</updated>
    <id>http://jpsilvashy.com/posts/chattyloo</id>
-   <content type="html">&lt;p&gt;Look, I know the name is stupid. There just aren&amp;#8217;t a lot of domains names containing the work &amp;#8220;chat&amp;#8221;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Look, I know the name is stupid. There just aren&amp;#8217;t a lot of domains names available containing the word &amp;#8220;chat&amp;#8221;, so I&amp;#8217;m stuck with this one!&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; is an asynchronous chat app written with Sinatra and persisted with Postgres or SQLite using Datamapper. There is not authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.&lt;/p&gt;
 
