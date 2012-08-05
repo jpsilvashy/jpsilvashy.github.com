@@ -11,4 +11,3 @@ Did you know you can open a console for your Sinatra apps just like you can with
 <pre>
  $ irb -r ./my_app.rb
 </pre>
-

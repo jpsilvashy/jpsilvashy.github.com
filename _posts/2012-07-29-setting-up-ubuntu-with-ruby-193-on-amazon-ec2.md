@@ -2,7 +2,7 @@
 layout: post
 title: Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2
 date: 2012-07-29
-category: development 
+category: development
 tags: ['ruby', 'ubuntu', 'aws']
 ---
 
@@ -24,7 +24,7 @@ Create a new Security Group. Let's just name it the same as the instance, blog (
 
 The last page of the setup process is just a summary of the instance that's about to be provisioned, if everything looks good, *launch it!*
 
-Before we get started let's assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance. 
+Before we get started let's assign our server an Elastic IP address, click Elastic IPs in the left navigation menu. Allocate a new address then associate it with your EC2 Instance.
 
 Next click Instances in the navigation menu, and take a look at your instance, it's state should now say **running**.
 

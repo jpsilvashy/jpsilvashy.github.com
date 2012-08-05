@@ -135,8 +135,20 @@ section {
   border:1px solid #fcf9e1;
   border-bottom:1px solid #f2eece;
   border-radius:3px;
-  overflow-x: auto;
   margin-bottom:1em;
+  position: relative;
+}
+
+.callout.github {
+  padding-right: 20%;
+}
+
+.octocat {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right:10px;
+  bottom:5px;
 }
 
 small {
