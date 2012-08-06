@@ -27,12 +27,7 @@
   <h1>Chattyloo</h1>
   <p class="meta"></p>
 
-  <p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names available containing the word &#8220;chat&#8221;, so I&#8217;m stuck with this one!</p>
-
-<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
-
-<p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
-<div class='callout github'>
+  <div class='callout github'>
   The source code for this application is available <a href='http://github.com/jpsilvashy/chattyloo'>on Github</a>.
   <svg class='octocat' viewBox='-0.2 -1 379 334' xmlns='http://www.w3.org/2000/svg'>
  <path d='m296.94 295.43c0 20.533-47.56 37.176-106.22 37.176-58.67 0-106.23-16.643-106.23-37.176s47.558-37.18 106.23-37.18c58.66 0 106.22 16.65 106.22 37.18z' fill='#9CDAF1' id='puddle' />
@@ -53,6 +48,14 @@
 </svg>
 
 </div>
+<p><a href='http://travis-ci.org/jpsilvashy/chattyloo'><img alt='Build Status' src='https://secure.travis-ci.org/jpsilvashy/chattyloo.png?branch=master' /></a> <a href='https://gemnasium.com/jpsilvashy/chattyloo'><img alt='Dependency Status' src='https://gemnasium.com/jpsilvashy/chattyloo.png' /></a> <a href='https://codeclimate.com/github/jpsilvashy/chattyloo'><img alt='Code Climate' src='https://codeclimate.com/badge.png' /></a></p>
+<hr />
+<p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names available containing the word &#8220;chat&#8221;, so I&#8217;m stuck with this one!</p>
+
+<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
+
+<p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
+
 <p>Besides the fact that it&#8217;s very simple, the app does have a few bells and whistles. Firstly, different sounds play when chat messages are sent and received. Hearts and :)&#8217;s are automatically rotated using CSS3 transforms. Lastly, the title element displays a status message when new messages are received.</p>
 
 <h2 id='usage'>Usage</h2>
