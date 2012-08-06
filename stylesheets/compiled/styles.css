@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 p, ul, ol, table, pre, dl {
   margin: 0 0 20px; }
 
+ul {
+  padding: 0;
+  list-style-position: inside; }
+
 h1, h2, h3 {
   line-height: 1.4; }
 

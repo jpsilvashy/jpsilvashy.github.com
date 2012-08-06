@@ -12,7 +12,6 @@ Look, I know the name is stupid. There just aren't a lot of domains names availa
 
 It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.
 
-
 <div class='callout github'>
   The source code for this application is available <a href='http://github.com/jpsilvashy/chattyloo'>on Github</a>.
   {% include octocat.svg %}
