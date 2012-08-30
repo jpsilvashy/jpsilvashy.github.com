@@ -12,8 +12,6 @@ First let's talk about a traditional cache. Take Memcached for example, it's an 
 
 Initially I built my mini-chat app [Chattyloo](http://chattyloo.com) using Postgres. Postgres is a **big hammer**, for quite a simple problem. I know I needed persistence and durability, but I didn't need such a serious Object Relationship Mapper. Moreover I didn't want to manage a database, and that was the biggest factor to move over to IronCache.
 
-Even though IronCache is an object caching system, it is at it's heart, MongoDB. But wait, isn't MongoDB's database write lock it's weakest point? True, it blows! But it's not MongoDB's fault, blame Spidermonkey or V8's single threaded process. The good thing is that this isn't an issue if you have multiple shards, the bad thing is that you have to have multiple shards. When MongoDB is setup with multiple instances and shards, it flies.
-
 Now this is one relationship here, but it's actually an advantage in the case of a chat app. I needed to have one relationship, as chat rooms have chats. The way around this is to store all your chats as a single value for that room. I've created an ORM-like finder:
 
 <pre class="prettyprint lang-ruby">

@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-08-30T12:16:49-07:00</updated>
+ <updated>2012-08-30T12:36:11-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -22,8 +22,6 @@
 &lt;p&gt;First let&amp;#8217;s talk about a traditional cache. Take Memcached for example, it&amp;#8217;s an in memory, non-durable, key/value store. It&amp;#8217;s great! It&amp;#8217;s probably the most popular object caching system there is. Until now, Memcached has always been my go-to solution.&lt;/p&gt;
 
 &lt;p&gt;Initially I built my mini-chat app &lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; using Postgres. Postgres is a &lt;strong&gt;big hammer&lt;/strong&gt;, for quite a simple problem. I know I needed persistence and durability, but I didn&amp;#8217;t need such a serious Object Relationship Mapper. Moreover I didn&amp;#8217;t want to manage a database, and that was the biggest factor to move over to IronCache.&lt;/p&gt;
-
-&lt;p&gt;Even though IronCache is an object caching system, it is at it&amp;#8217;s heart, MongoDB. But wait, isn&amp;#8217;t MongoDB&amp;#8217;s database write lock it&amp;#8217;s weakest point? True, it blows! But it&amp;#8217;s not MongoDB&amp;#8217;s fault, blame Spidermonkey or V8&amp;#8217;s single threaded process. The good thing is that this isn&amp;#8217;t an issue if you have multiple shards, the bad thing is that you have to have multiple shards. When MongoDB is setup with multiple instances and shards, it flies.&lt;/p&gt;
 
 &lt;p&gt;Now this is one relationship here, but it&amp;#8217;s actually an advantage in the case of a chat app. I needed to have one relationship, as chat rooms have chats. The way around this is to store all your chats as a single value for that room. I&amp;#8217;ve created an ORM-like finder:&lt;/p&gt;
 &lt;pre class='prettyprint lang-ruby'&gt;
