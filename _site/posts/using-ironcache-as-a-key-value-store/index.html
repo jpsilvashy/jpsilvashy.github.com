@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+  <title>Using IronCache as a Key Value Store</title>
+  <meta name="author" content="Joseph Silvashy">
+  <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
+
+  <link rel="stylesheet" href="/stylesheets/compiled/styles.css">
+  <link rel="stylesheet" href="/stylesheets/compiled/prettify.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1><a href="/">Joseph Silvashy</a></h1>
+      <p>Building web applications and businesses.</p>
+    </header>
+
+    <section>
+      <div id="post">
+  <h1>Using IronCache as a Key Value Store</h1>
+  <p class="meta"></p>
+
+  <p>While IronCache is a great option for caching, it can also be used to persist data more permanently. There are dozens of great uses for a persistent key/value store, however, we&#8217;ll be building a simple chat app with Sinatra using IronCache as our datastore.</p>
+
+<p>First let&#8217;s talk about a traditional cache. Take Memcached for example, it&#8217;s an in memory, non-durable, key/value store. It&#8217;s great! It&#8217;s probably the most popular object caching system there is. Until now, Memcached has always been my go-to solution.</p>
+
+<p>Initially I built my mini-chat app <a href='http://chattyloo.com'>Chattyloo</a> using Postgres. Postgres is a <strong>big hammer</strong>, for quite a simple problem. I know I needed persistence and durability, but I didn&#8217;t need such a serious Object Relationship Mapper. Moreover I didn&#8217;t want to manage a database, and that was the biggest factor to move over to IronCache.</p>
+
+<p>Even though IronCache is an object caching system, it is at it&#8217;s heart, MongoDB. But wait, isn&#8217;t MongoDB&#8217;s database write lock it&#8217;s weakest point? True, it blows! But it&#8217;s not MongoDB&#8217;s fault, blame Spidermonkey or V8&#8217;s single threaded process. The good thing is that this isn&#8217;t an issue if you have multiple shards, the bad thing is that you have to have multiple shards. When MongoDB is setup with multiple instances and shards, it flies.</p>
+
+<p>Now this is one relationship here, but it&#8217;s actually an advantage in the case of a chat app. I needed to have one relationship, as chat rooms have chats. The way around this is to store all your chats as a single value for that room. I&#8217;ve created an ORM-like finder:</p>
+<pre class='prettyprint lang-ruby'>
+def self.find_or_initialize(name)
+  if settings.ironcache.cache(name).get('messages').nil?
+    self.new(name)
+  else
+    self.find(name)
+  end
+end
+</pre>
+<p>Now this is a sinatra app so <code>settings</code> is a hash, and <code>ironcache</code> is just an instance of <code>IronCache::Client</code>, see here: https://github.com/jpsilvashy/chattyloo/blob/master/app.rb#L22</p>
+
+<p>When a new chat is POST&#8217;ed, the we insert it like so:</p>
+<pre class='prettyprint lang-ruby'>
+# Inserts a new message into the channel
+def insert(message)
+  self.messages.push message
+  self.messages = self.messages.last(settings.channel_message_limit)
+  self.save
+end
+</pre>
+<p>The <code>last()</code>, trims off the messages so we don&#8217;t grow the size of the object too large, as they are all loaded at once.</p>
+
+<p>Lastly, chats are retrieved like so:</p>
+<pre class='prettyprint lang-ruby'>
+def self.find(name)
+  @name = name
+  @messages = JSON.parse(settings.ironcache.cache(@name).get('messages').value)
+
+  Channel.new(@name, @messages)
+end
+</pre>
+<p>This finder will return the channel with the messages. Now in your views you can iterate over the <code>@messages</code> for a given instance of <code>Channel</code>.</p>
+
+<p>If you want to check out the final product, head over to <a href='http://chattyloo.com'>chattyloo.com</a>. The project is entirely open source on Github as well, check out <a href='http://github.com/jpsilvashy/chattyloo'>Chattyloo on Github</a>.</p>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+	  <li><a href="/posts/chattyloo">Chattyloo</a> &mdash; 04 Aug 2012</li>
+    
+	  <li><a href="/posts/deploying-a-rails-application-on-amazon-ec2">Deploying a Rails Application on Amazon EC2</a> &mdash; 30 Jul 2012</li>
+    
+	  <li><a href="/posts/setting-up-ubuntu-with-ruby-193-on-amazon-ec2">Setting up Ubuntu with Ruby 1.9.3 on Amazon EC2</a> &mdash; 29 Jul 2012</li>
+    
+  </ul>
+</div>
+    </section>
+
+    <footer>
+      <p>Follow me on <a href="http://github.com/jpsilvashy">Github</a>, <a href="http://twitter.com/jpsilvashy">Twitter</a>, and <a href="http://stackoverflow.com/users/103739/joseph-silvashy">Stack Overflow</a>. Fork my blog on <a href="http://github.com/jpsilvashy/jpsilvashy.github.com">Github</a>.</p>
+    </footer>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="/javascripts/scale.fix.js"></script>
+  <script src="/javascripts/prettify.js"></script>
+  <script src="/javascripts/main.js"></script>
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-33729498-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+</body>
+</html>
