@@ -4,61 +4,13 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2012-08-30T12:36:11-07:00</updated>
+ <updated>2012-09-06T17:14:55-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
    <email></email>
  </author>
 
- 
- <entry>
-   <title>Using IronCache as a Key Value Store</title>
-   <link href="http://jpsilvashy.com/posts/using-ironcache-as-a-key-value-store"/>
-   <updated>2012-08-22T00:00:00-07:00</updated>
-   <id>http://jpsilvashy.com/posts/using-ironcache-as-a-key-value-store</id>
-   <content type="html">&lt;p&gt;While IronCache is a great option for caching, it can also be used to persist data more permanently. There are dozens of great uses for a persistent key/value store, however, we&amp;#8217;ll be building a simple chat app with Sinatra using IronCache as our datastore.&lt;/p&gt;
-
-&lt;p&gt;First let&amp;#8217;s talk about a traditional cache. Take Memcached for example, it&amp;#8217;s an in memory, non-durable, key/value store. It&amp;#8217;s great! It&amp;#8217;s probably the most popular object caching system there is. Until now, Memcached has always been my go-to solution.&lt;/p&gt;
-
-&lt;p&gt;Initially I built my mini-chat app &lt;a href='http://chattyloo.com'&gt;Chattyloo&lt;/a&gt; using Postgres. Postgres is a &lt;strong&gt;big hammer&lt;/strong&gt;, for quite a simple problem. I know I needed persistence and durability, but I didn&amp;#8217;t need such a serious Object Relationship Mapper. Moreover I didn&amp;#8217;t want to manage a database, and that was the biggest factor to move over to IronCache.&lt;/p&gt;
-
-&lt;p&gt;Now this is one relationship here, but it&amp;#8217;s actually an advantage in the case of a chat app. I needed to have one relationship, as chat rooms have chats. The way around this is to store all your chats as a single value for that room. I&amp;#8217;ve created an ORM-like finder:&lt;/p&gt;
-&lt;pre class='prettyprint lang-ruby'&gt;
-def self.find_or_initialize(name)
-  if settings.ironcache.cache(name).get('messages').nil?
-    self.new(name)
-  else
-    self.find(name)
-  end
-end
-&lt;/pre&gt;
-&lt;p&gt;Now this is a sinatra app so &lt;code&gt;settings&lt;/code&gt; is a hash, and &lt;code&gt;ironcache&lt;/code&gt; is just an instance of &lt;code&gt;IronCache::Client&lt;/code&gt;, see here: https://github.com/jpsilvashy/chattyloo/blob/master/app.rb#L22&lt;/p&gt;
-
-&lt;p&gt;When a new chat is POST&amp;#8217;ed, the we insert it like so:&lt;/p&gt;
-&lt;pre class='prettyprint lang-ruby'&gt;
-# Inserts a new message into the channel
-def insert(message)
-  self.messages.push message
-  self.messages = self.messages.last(settings.channel_message_limit)
-  self.save
-end
-&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;last()&lt;/code&gt;, trims off the messages so we don&amp;#8217;t grow the size of the object too large, as they are all loaded at once.&lt;/p&gt;
-
-&lt;p&gt;Lastly, chats are retrieved like so:&lt;/p&gt;
-&lt;pre class='prettyprint lang-ruby'&gt;
-def self.find(name)
-  @name = name
-  @messages = JSON.parse(settings.ironcache.cache(@name).get('messages').value)
-
-  Channel.new(@name, @messages)
-end
-&lt;/pre&gt;
-&lt;p&gt;This finder will return the channel with the messages. Now in your views you can iterate over the &lt;code&gt;@messages&lt;/code&gt; for a given instance of &lt;code&gt;Channel&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to check out the final product, head over to &lt;a href='http://chattyloo.com'&gt;chattyloo.com&lt;/a&gt;. The project is entirely open source on Github as well, check out &lt;a href='http://github.com/jpsilvashy/chattyloo'&gt;Chattyloo on Github&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
  
  <entry>
    <title>Chattyloo</title>
