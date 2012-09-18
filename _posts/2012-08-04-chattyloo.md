@@ -2,7 +2,7 @@
 layout: post
 title: Chattyloo
 date: 2012-08-04
-category:
+category: development
 tags: ['ruby', 'sinatra', 'heroku']
 ---
 

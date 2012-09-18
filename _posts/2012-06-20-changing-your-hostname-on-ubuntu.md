@@ -2,7 +2,7 @@
 layout: post
 title: Changing your hostname on Ubuntu
 date: 2012-06-20
-category:
+category: development
 tags: ['ubuntu']
 ---
 

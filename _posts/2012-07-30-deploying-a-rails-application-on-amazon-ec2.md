@@ -2,7 +2,7 @@
 layout: post
 title: Deploying a Rails Application on Amazon EC2
 date: 2012-07-30
-category:
+category: development
 tags: ['ruby', 'rails', 'ubuntu', 'aws']
 ---
 

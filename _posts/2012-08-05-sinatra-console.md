@@ -2,7 +2,7 @@
 layout: post
 title: Sinatra Console
 date: 2012-06-15
-category:
+category: development
 tags: ['ruby', sinatra']
 ---
 
