@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>Chattyloo</title>
+  <title>X-Messages</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -24,11 +24,11 @@
 
     <section>
       <div id="post">
-  <h1>Chattyloo</h1>
+  <h1>X-Messages</h1>
   <p class="meta"></p>
 
   <div class='callout github'>
-  The source code for this application is available <a href='http://github.com/jpsilvashy/chattyloo'>on Github</a>.
+  An example application for this post is available <a href='http://github.com/jpsilvashy/x-messages'>on Github</a>. The application itself is deployed <a href='http://x-messages.herokuapp.com'>on Heroku</a>.
   <svg class='octocat' viewBox='-0.2 -1 379 334' xmlns='http://www.w3.org/2000/svg'>
  <path d='m296.94 295.43c0 20.533-47.56 37.176-106.22 37.176-58.67 0-106.23-16.643-106.23-37.176s47.558-37.18 106.23-37.18c58.66 0 106.22 16.65 106.22 37.18z' fill='#9CDAF1' id='puddle' />
   <g fill='#7DBBE6' id='shadow-legs'>
@@ -48,60 +48,119 @@
 </svg>
 
 </div>
-<p><a href='http://travis-ci.org/jpsilvashy/chattyloo'><img alt='Build Status' src='https://secure.travis-ci.org/jpsilvashy/chattyloo.png?branch=master' /></a> <a href='https://gemnasium.com/jpsilvashy/chattyloo'><img alt='Dependency Status' src='https://gemnasium.com/jpsilvashy/chattyloo.png' /></a> <a href='https://codeclimate.com/github/jpsilvashy/chattyloo'><img alt='Code Climate' src='https://codeclimate.com/badge.png' /></a></p>
-<hr />
-<p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names available containing the word &#8220;chat&#8221;, so I&#8217;m stuck with this one!</p>
+<h2 id='using_headers_to_provide_additional_response_information'>Using headers to provide additional response information</h2>
 
-<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
+<p>While working on <a href='http://flyer.io'>Flyer</a>, I wanted to try something different with handling flash messages. I&#8217;ve always wanted to get more creative with the usage of response headers so I decided to try to use those as a transport for the flash messages typically handled in the views by just rendering some html messages at the top of the page.</p>
 
-<p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
+<p>If you&#8217;d like to checkout the &#8220;mostly&#8221; working example, head over to <a href='http://github.com/jpsilvashy/x-messages'>github.com/jpsilvashy/x-headers</a>, or check out the app running on heroku at <a href='http://x-messages.herokuapp.com'>x-messages.herokuapp.com</a>.</p>
 
-<p>Besides the fact that it&#8217;s very simple, the app does have a few bells and whistles. Firstly, different sounds play when chat messages are sent and received. Hearts and :)&#8217;s are automatically rotated using CSS3 transforms. Lastly, the title element displays a status message when new messages are received.</p>
+<h3 id='why_you_should_just_render_some_javascript_in_the_response_body_instead'>Why? You should just render some JavaScript in the response body instead!</h3>
 
-<h2 id='usage'>Usage</h2>
+<p>So the biggest reason why I wanted to sort of ignore the &#8220;Rails Way&#8221; on this one is to try to extend the functionality beyond a rails application. The major idea here is that we can use a header named <code>X-Messages</code> to deliver more universal information about the response. I feel there is so much more informtion than just a 200 status that should be represented in a familiar place amongts all HTTP applications.</p>
 
-<p>First clone the repository:</p>
-<pre>
-git clone git@github.com:jpsilvashy/chattyloo.git
+<p>By using a common header like <code>X-Messages</code> all our applications can send additional response information for any format, not just HTML or JSON. Lastly our clients will all know to look in a specific place for any sort of request.</p>
+
+<p>In this example I&#8217;ve built a Rails application which returns the <code>X-Messages</code> header with the same information that <code>ActionController::Flash</code> would via the <code>flash</code> method.</p>
+
+<p>There isn&#8217;t much to it, and it won&#8217;t affect the current functionality of you app either, add this to your <code>application_controller.rb</code>:</p>
+<pre class='prettyprint lang-ruby'>
+# After filter to insert the headers in the response
+after_filter :x_messages
+
+# Also make available as a helper so we can render
+# the errors of the user doesn't have js
+helper_method :x_messages
+
+private
+
+# If there is a flash present, insert into header
+def x_messages
+  if flash.present?
+    response.headers['X-Messages'] = flash.to_hash.to_json
+    flash.to_hash
+  end
+end
 </pre>
-<p>Run the <code>bundle</code> command at the root of the project:</p>
-<pre>
-cd chattyloo/
-bundle
-</pre>
-<p>Then you should be able to start the server:</p>
-<pre>
-./chattyloo.rb
-</pre>
-<p>Then just go to <a href='http://localhost:4567'>localhost:4567</a>, and start chatting!</p>
+<p>Then in your view you can do a variety of things, I created a helper which would render the errors at the top of the page if the user doesn&#8217;t have JS (in the case where the client is obviously a web browser), but we also render an array of the same objects in the JS near the bottom of the page so we can just access that when the DOM is ready.</p>
 
-<h2 id='deploying_to_heroku'>Deploying to Heroku</h2>
+<p>Here is the helper I made to render the messages in the page for the users which don&#8217;t have JS:</p>
+<pre class='prettyprint lang-ruby'>
+def render_x_messages
+  if x_messages
+    content_tag :ul, :class => 'x-messages' do
+      x_messages.collect do |type, message|
+        concat content_tag(
+          :li, message, :class => "message-#{type}"
+        )
+      end
+    end
+  end
+end
+</pre>
+<p>Put that helper anywhere in your layout where you want to render the messages. Then by the footer I&#8217;m also inserting some JavaScript for us to iterate over in our JS after the page loads.</p>
+<pre class='prettyprint lang-ruby'>
+// You probably use erb or haml, this is just plain ruby
+if x_message
+  var x_messages = x_messages.to_json.html_safe
+end
+</pre>
+<p>Make sure to update the manifest for the JS files and include Alertify.js, then lets start handling the response for AJAX requests.</p>
 
-<p>You can deploy your own Chattyloo app! Here are the instructions for deploying to <a href='http://heroku.com'>Heroku</a>.</p>
+<p>This function reads the header from the XHR response and parses the content in <code>X-Messages</code> as JSON.</p>
+<pre class='prettyprint'>
+var get_x_messages = function(response) {
 
-<p>First in the root creat a new heroku app:</p>
-<pre>
-heroku apps:create mychatapp
+  var x_messages_header =
+    response.getResponseHeader('X-Messages');
+
+  // Parse the header if there is one
+  if (typeof x_messages_header !== "undefined") {
+    return $.parseJSON(x_messages_header)
+  }
+}
 </pre>
-<p>Then add the addon for the shared database, this will create a Postgres database with all the proper environment variables needed to connect to it.</p>
-<pre>
-heroku addons:add shared-database
+<p>This is a pretty straight-forward function for creating an Alertify log message for each message in the parse <code>X-Messages</code> header.</p>
+<pre class='prettyprint'>
+// For each message, alert the user
+var handle_messages = function(messages) {
+  $.each(messages, function(type, message) {
+    alertify.log(message, type);
+  });
+}
 </pre>
-<p>Now deploy the app to the server and go check it out</p>
-<pre>
-git push heroku master
+<p>This function is the main way we intercept the headers when they are returned to the client. This allows us to watch for ajax events, and when they are done handle the response with the first function we created, <code>get_x_messages()</code>.</p>
+<pre class='prettyprint'>
+// Get messages from response header
+$(document).ajaxComplete(function(event, response) {
+  handle_messages(get_x_messages(response))
+});
 </pre>
+<p>Lastly when the DOM is loaded we want to hide (or <code>remove()</code> for simplicty) the flash messages that were rendered in the page.</p>
+
+<p>Meanwhile, we also want to see if there are messages on the page that just loaded, and since the reponse would be for standard HTML, we wouln&#8217;t have the XHR object available to us. This stems from the way the DOM and BOM were created to seperate the two. There would be no real way to read the response headers &#8220;after the fact&#8221; with JavaScript, unless we made another request to our current path with XHR. The solution I found was to render the messages in the application layout as a JSON object.</p>
+<pre class='prettyprint'>
+$(function() {
+
+  // hide these since we have alertify to show our messages
+  $('.x-messages').remove();
+
+  if (typeof x_messages !== "undefined") {
+    handle_messages(x_messages);
+  }
+})
+</pre>
+<p>This allows us to handle existing errors that come with the page&#8217;s response, and any subsequent responses from remote requests in the same way. This is because the reponses made while already on the page with XHR will be caught by the <code>ajaxComplete()</code> event handler and the other ones will be handled when the page loaded.</p>
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
     
-	  <li><a href="/posts/x-messages">X-Messages</a> &mdash; 15 Dec 2012</li>
-    
 	  <li><a href="/posts/device-orientation">Device Orientation Events</a> &mdash; 20 Nov 2012</li>
     
 	  <li><a href="/posts/building-a-simple-html5-framework">Building a Simple HTML5 Framework</a> &mdash; 18 Sep 2012</li>
+    
+	  <li><a href="/posts/chattyloo">Chattyloo</a> &mdash; 04 Aug 2012</li>
     
   </ul>
 </div>

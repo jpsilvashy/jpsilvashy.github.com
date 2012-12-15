@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>Chattyloo</title>
+  <title>Device Orientation Events</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -24,11 +24,11 @@
 
     <section>
       <div id="post">
-  <h1>Chattyloo</h1>
+  <h1>Device Orientation Events</h1>
   <p class="meta"></p>
 
   <div class='callout github'>
-  The source code for this application is available <a href='http://github.com/jpsilvashy/chattyloo'>on Github</a>.
+  The source code for this example is available as a gist <a href='https://gist.github.com/4120797'>on Github</a>.
   <svg class='octocat' viewBox='-0.2 -1 379 334' xmlns='http://www.w3.org/2000/svg'>
  <path d='m296.94 295.43c0 20.533-47.56 37.176-106.22 37.176-58.67 0-106.23-16.643-106.23-37.176s47.558-37.18 106.23-37.18c58.66 0 106.22 16.65 106.22 37.18z' fill='#9CDAF1' id='puddle' />
   <g fill='#7DBBE6' id='shadow-legs'>
@@ -48,49 +48,7 @@
 </svg>
 
 </div>
-<p><a href='http://travis-ci.org/jpsilvashy/chattyloo'><img alt='Build Status' src='https://secure.travis-ci.org/jpsilvashy/chattyloo.png?branch=master' /></a> <a href='https://gemnasium.com/jpsilvashy/chattyloo'><img alt='Dependency Status' src='https://gemnasium.com/jpsilvashy/chattyloo.png' /></a> <a href='https://codeclimate.com/github/jpsilvashy/chattyloo'><img alt='Code Climate' src='https://codeclimate.com/badge.png' /></a></p>
-<hr />
-<p>Look, I know the name is stupid. There just aren&#8217;t a lot of domains names available containing the word &#8220;chat&#8221;, so I&#8217;m stuck with this one!</p>
-
-<p><a href='http://chattyloo.com'>Chattyloo</a> is an asynchronous chat app written in Sinatra and persisted with Postgres or SQLite using Datamapper. There is no authentication scheme. Users arrive at the index and are redirected to a chat room with a unique URL that can be shared for others to join the room.</p>
-
-<p>It makes use of Server-Sent Events (SSEs) over WebSockets for simplicity. Go have a look at the source code! The app is entirely open-source, please help improve it.</p>
-
-<p>Besides the fact that it&#8217;s very simple, the app does have a few bells and whistles. Firstly, different sounds play when chat messages are sent and received. Hearts and :)&#8217;s are automatically rotated using CSS3 transforms. Lastly, the title element displays a status message when new messages are received.</p>
-
-<h2 id='usage'>Usage</h2>
-
-<p>First clone the repository:</p>
-<pre>
-git clone git@github.com:jpsilvashy/chattyloo.git
-</pre>
-<p>Run the <code>bundle</code> command at the root of the project:</p>
-<pre>
-cd chattyloo/
-bundle
-</pre>
-<p>Then you should be able to start the server:</p>
-<pre>
-./chattyloo.rb
-</pre>
-<p>Then just go to <a href='http://localhost:4567'>localhost:4567</a>, and start chatting!</p>
-
-<h2 id='deploying_to_heroku'>Deploying to Heroku</h2>
-
-<p>You can deploy your own Chattyloo app! Here are the instructions for deploying to <a href='http://heroku.com'>Heroku</a>.</p>
-
-<p>First in the root creat a new heroku app:</p>
-<pre>
-heroku apps:create mychatapp
-</pre>
-<p>Then add the addon for the shared database, this will create a Postgres database with all the proper environment variables needed to connect to it.</p>
-<pre>
-heroku addons:add shared-database
-</pre>
-<p>Now deploy the app to the server and go check it out</p>
-<pre>
-git push heroku master
-</pre>
+<p>Using <a href='http://d3js.org'>d3.js</a> along with an event handler we can respond to the <code>deviceorientation</code> event with a listener to translate the values to RGB. Try the example out on your ipad.</p>
 </div>
 
 <div id="related">
@@ -99,9 +57,9 @@ git push heroku master
     
 	  <li><a href="/posts/x-messages">X-Messages</a> &mdash; 15 Dec 2012</li>
     
-	  <li><a href="/posts/device-orientation">Device Orientation Events</a> &mdash; 20 Nov 2012</li>
-    
 	  <li><a href="/posts/building-a-simple-html5-framework">Building a Simple HTML5 Framework</a> &mdash; 18 Sep 2012</li>
+    
+	  <li><a href="/posts/chattyloo">Chattyloo</a> &mdash; 04 Aug 2012</li>
     
   </ul>
 </div>
