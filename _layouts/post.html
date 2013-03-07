@@ -8,6 +8,8 @@ layout: default
   {{ content }}
 </div>
 
+<div id="chattyloo"></div>
+
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
@@ -16,3 +18,14 @@ layout: default
     {% endfor %}
   </ul>
 </div>
+
+<script type="text/javascript">
+  var currentUrl = window.location.pathname.replace("/","-")
+  var chattyloo = document.createElement("iframe");
+
+  chattyloo.setAttribute("src", "http://chattyloo.com/" + currentUrl + "?embed=true");
+  chattyloo.setAttribute("height", "100%");
+  chattyloo.setAttribute("width", "100%");
+
+  document.getElementById('chattyloo').appendChild(chattyloo);
+</script>
