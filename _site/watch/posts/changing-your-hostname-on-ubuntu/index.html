@@ -56,18 +56,18 @@ sudo reboot
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
-    
+
 	  <li><a href="/posts/launching-a-company-in-an-international-marketplace">LAUNCHing a company in an international marketplace</a> &mdash; 06 Mar 2013</li>
-    
+
 	  <li><a href="/posts/x-messages-slides">X-Messages Slides</a> &mdash; 26 Feb 2013</li>
-    
+
 	  <li><a href="/posts/x-messages">X-Messages</a> &mdash; 15 Dec 2012</li>
-    
+
   </ul>
 </div>
 
 <script type="text/javascript">
-  var currentUrl = window.location.pathname.replace("/","-")
+  var currentUrl = encodeURIComponent(window.location.pathname);
   var chattyloo = document.createElement("iframe");
 
   chattyloo.setAttribute("src", "http://chattyloo.com/" + currentUrl + "?embed=true");
