@@ -16,6 +16,8 @@
   <![endif]-->
 </head>
 <body>
+  <div id="fb-root"></div>
+
   <div class="wrapper">
     <header>
       <h1><a href="/">Joseph Silvashy</a></h1>
@@ -51,31 +53,22 @@ sudo reboot
 <p>When you log back in use the command <code>hostname</code> to check that your changes have taken effect.</p>
 </div>
 
-<div id="chattyloo"></div>
-
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
-
+    
 	  <li><a href="/posts/launching-a-company-in-an-international-marketplace">LAUNCHing a company in an international marketplace</a> &mdash; 06 Mar 2013</li>
-
+    
 	  <li><a href="/posts/x-messages-slides">X-Messages Slides</a> &mdash; 26 Feb 2013</li>
-
+    
 	  <li><a href="/posts/x-messages">X-Messages</a> &mdash; 15 Dec 2012</li>
-
+    
   </ul>
 </div>
 
-<script type="text/javascript">
-  var currentUrl = encodeURIComponent(window.location.pathname);
-  var chattyloo = document.createElement("iframe");
+<h2>Comments</h2>
 
-  chattyloo.setAttribute("src", "http://chattyloo.com/" + currentUrl + "?embed=true");
-  chattyloo.setAttribute("height", "100%");
-  chattyloo.setAttribute("width", "100%");
-
-  document.getElementById('chattyloo').appendChild(chattyloo);
-</script>
+<div class="fb-comments" data-href="http://jpsilvashy.com/" data-width="500" data-num-posts="10"></div>
 
     </section>
 
@@ -84,6 +77,7 @@ sudo reboot
     </footer>
   </div>
 
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/scale.fix.js"></script>
   <script src="/javascripts/prettify.js"></script>
@@ -96,5 +90,16 @@ sudo reboot
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
+
+  <!-- Facebook Comments -->
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=221344838001101";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
 </body>
 </html>

@@ -1,14 +1,13 @@
 ---
 layout: default
 ---
+
 <div id="post">
   <h1>{{ page.title }}</h1>
   <p class="meta">{{ page.meta }}</p>
 
   {{ content }}
 </div>
-
-<div id="chattyloo"></div>
 
 <div id="related">
   <h2>Related Posts</h2>
@@ -19,13 +18,6 @@ layout: default
   </ul>
 </div>
 
-<script type="text/javascript">
-  var currentUrl = window.location.pathname.replace("/","-")
-  var chattyloo = document.createElement("iframe");
+<h2>Comments</h2>
 
-  chattyloo.setAttribute("src", "http://chattyloo.com/" + currentUrl + "?embed=true");
-  chattyloo.setAttribute("height", "100%");
-  chattyloo.setAttribute("width", "100%");
-
-  document.getElementById('chattyloo').appendChild(chattyloo);
-</script>
+<div class="fb-comments" data-href="http://jpsilvashy.com/{{ post.url }}" data-width="500" data-num-posts="10"></div>
