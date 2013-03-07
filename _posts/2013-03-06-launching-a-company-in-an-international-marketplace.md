@@ -10,7 +10,7 @@ Just hours ago LAUNCH Conference 2013 ended. First things first, LAUNCH was the 
 
 ## Watch our pitch below
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/ed0Mi3ma0uw" frameborder="0" allowfullscreen='' ></iframe>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/ed0Mi3ma0uw" frameborder="0" allowfullscreen='' >&nbsp;</iframe>
 
 ## Judges feedback
 
