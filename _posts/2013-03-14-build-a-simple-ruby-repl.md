@@ -13,13 +13,13 @@ tags: ['ruby']
 
 ## What is a REPL?
 
-A REPL is a [Read–eval–print loop](http://goo.gl/BdZ5M). The term is most usually used to refer to a [Lisp](http://en.wikipedia.org/wiki/Lisp_(programming_language)) interactive environment, however many other languages have a similar mechanism, like [IRB](http://en.wikipedia.org/wiki/Interactive_Ruby_Shell) with Ruby for example.
+A REPL is a [Read–eval–print loop](http://goo.gl/dWURA) interactive environment, however many other languages have a similar mechanism, like [IRB](http://goo.gl/BdZ5M) with Ruby for example.
 
 Other nerds might call it an interactive toplevel or a language shell... but they should just knock it off, because that sounds fucking annoying.
 
 ## Why would I want one?
 
-Everyone has their go-to tools, especially in your regular system shell. Even though most developers have access to powerful tools with Rake, and Thor, you'll still often find yourself piping together `sed`, `grep`, and `awk` commands to do quick tasks.
+Everyone has their go-to tools, especially in your regular system shell. Even though most developers have access to powerful tools like [Rake](http://rake.rubyforge.org/), and [Thor](https://github.com/wycats/thor), you'll still often find yourself piping together `sed`, `grep`, and `awk` commands to do quick tasks.
 
 But for more involved tasks that I find myself doing more often I'll build a rake task. Sometimes these things just don't cut it and you need to open up your system in a more controlled way.
 
@@ -54,3 +54,5 @@ loop do
   repl[">> "]
 end
 </pre>
+
+Again, the project is <a href='http://github.com/jpsilvashy/repl'>on Github</a>, fork it, let's make it more simple! Also this is going to be a part of a poker game that we'll be building over the next couple weeks.

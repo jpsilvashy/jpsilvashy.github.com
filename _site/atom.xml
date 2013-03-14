@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2013-03-14T01:24:01-07:00</updated>
+ <updated>2013-03-14T01:28:07-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -40,13 +40,13 @@
 &lt;/div&gt;
 &lt;h2 id='what_is_a_repl'&gt;What is a REPL?&lt;/h2&gt;
 
-&lt;p&gt;A REPL is a &lt;a href='http://goo.gl/BdZ5M'&gt;Read–eval–print loop&lt;/a&gt;. The term is most usually used to refer to a &lt;a href='http://en.wikipedia.org/wiki/Lisp_(programming_language'&gt;Lisp&lt;/a&gt;) interactive environment, however many other languages have a similar mechanism, like &lt;a href='http://en.wikipedia.org/wiki/Interactive_Ruby_Shell'&gt;IRB&lt;/a&gt; with Ruby for example.&lt;/p&gt;
+&lt;p&gt;A REPL is a &lt;a href='http://goo.gl/dWURA'&gt;Read–eval–print loop&lt;/a&gt; interactive environment, however many other languages have a similar mechanism, like &lt;a href='http://goo.gl/BdZ5M'&gt;IRB&lt;/a&gt; with Ruby for example.&lt;/p&gt;
 
 &lt;p&gt;Other nerds might call it an interactive toplevel or a language shell&amp;#8230; but they should just knock it off, because that sounds fucking annoying.&lt;/p&gt;
 
 &lt;h2 id='why_would_i_want_one'&gt;Why would I want one?&lt;/h2&gt;
 
-&lt;p&gt;Everyone has their go-to tools, especially in your regular system shell. Even though most developers have access to powerful tools with Rake, and Thor, you&amp;#8217;ll still often find yourself piping together &lt;code&gt;sed&lt;/code&gt;, &lt;code&gt;grep&lt;/code&gt;, and &lt;code&gt;awk&lt;/code&gt; commands to do quick tasks.&lt;/p&gt;
+&lt;p&gt;Everyone has their go-to tools, especially in your regular system shell. Even though most developers have access to powerful tools like &lt;a href='http://rake.rubyforge.org/'&gt;Rake&lt;/a&gt;, and &lt;a href='https://github.com/wycats/thor'&gt;Thor&lt;/a&gt;, you&amp;#8217;ll still often find yourself piping together &lt;code&gt;sed&lt;/code&gt;, &lt;code&gt;grep&lt;/code&gt;, and &lt;code&gt;awk&lt;/code&gt; commands to do quick tasks.&lt;/p&gt;
 
 &lt;p&gt;But for more involved tasks that I find myself doing more often I&amp;#8217;ll build a rake task. Sometimes these things just don&amp;#8217;t cut it and you need to open up your system in a more controlled way.&lt;/p&gt;
 
@@ -75,7 +75,8 @@ end
 loop do
   repl[&quot;&gt;&gt; &quot;]
 end
-&lt;/pre&gt;</content>
+&lt;/pre&gt;
+&lt;p&gt;Again, the project is &lt;a href='http://github.com/jpsilvashy/repl'&gt;on Github&lt;/a&gt;, fork it, let&amp;#8217;s make it more simple! Also this is going to be a part of a poker game that we&amp;#8217;ll be building over the next couple weeks.&lt;/p&gt;</content>
  </entry>
  
  <entry>
