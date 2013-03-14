@@ -2,7 +2,7 @@
 layout: post
 title: LAUNCHing a company in an international marketplace
 date: 2013-03-06
-category:
+category: business
 tags: ['business', 'startups', 'flyer']
 ---
 

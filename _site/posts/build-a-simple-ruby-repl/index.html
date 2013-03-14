@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>Building a Simple HTML5 Framework</title>
+  <title>Build a simple Ruby REPL</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -26,11 +26,11 @@
 
     <section>
       <div id="post">
-  <h1>Building a Simple HTML5 Framework</h1>
+  <h1>Build a simple Ruby REPL</h1>
   <p class="meta"></p>
 
   <div class='callout github'>
-  The source code for this application is available <a href='http://github.com/jpsilvashy/newton'>on Github</a>.
+  Find the code for this post on <a href='http://github.com/jpsilvashy/repl'>on Github</a>. The application itself is deployed <a href='http://x-messages.herokuapp.com'>on Heroku</a>.
   <svg class='octocat' viewBox='-0.2 -1 379 334' xmlns='http://www.w3.org/2000/svg'>
  <path d='m296.94 295.43c0 20.533-47.56 37.176-106.22 37.176-58.67 0-106.23-16.643-106.23-37.176s47.558-37.18 106.23-37.18c58.66 0 106.22 16.65 106.22 37.18z' fill='#9CDAF1' id='puddle' />
   <g fill='#7DBBE6' id='shadow-legs'>
@@ -50,20 +50,55 @@
 </svg>
 
 </div>
-<p>I just started building an HTML5 framework. The project is intended to provide a way to quickly kickoff new projects without overly complex CSS.</p>
+<h2 id='what_is_a_repl'>What is a REPL?</h2>
 
-<p>I&#8217;ll post more updates here as I build the framework itself, but for now, go check out the project here <a href='http://github.com/jpsilvashy/newton'>on Github</a>.</p>
+<p>A REPL is a <a href='http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop'>Read–eval–print loop</a>. The term is most usually used to refer to a Lisp interactive environment, however many other languages have a similar mechanism, like IRB with Ruby for example.</p>
+
+<p>Other nerds might call them an interactive toplevel or a language shell&#8230; but they should just knock it off, because that sounds dumb.</p>
+
+<h2 id='why_would_i_want_one'>Why would I want one?</h2>
+
+<p>Everyone has their go-to tools, especially in your regular system shell. Even though most developers have access to powerful tools with Rake, and Thor, you&#8217;ll still often find yourself piping together <code>sed</code>, <code>grep</code>, and <code>awk</code> commands to do quick tasks.</p>
+
+<p>But for more involved tasks that I find myself doing more often I&#8217;ll build a rake task. Sometimes these things just don&#8217;t cut it and you need to open up your system in a more controlled way.</p>
+
+<p>I like to build out my toolchain for each project or system I work on. Often times that means making a command line interface to my application, this is the ideal case for a REPL.</p>
+
+<h2 id='example'>Example</h2>
+
+<p>I&#8217;m going to break it out in to three parts, first a method to handle the input.</p>
+
+<p>When we handle the input, we would probably run some methods deep in our application or build a mini DSL for your methods you&#8217;d want to run.</p>
+<pre class='prettyprint lang-ruby'>
+def handle_input(input)
+  result = eval(input)
+  puts(" => #{result}")
+end
+</pre>
+<p>This is a lambda that runs the content of the first block after the input is chomped.</p>
+<pre class='prettyprint lang-ruby'>
+repl = -> prompt do
+  print prompt
+  handle_input(gets.chomp!)
+end
+</pre>
+<p>After evaling and returning, fire up the prompt lambda again, this loops after every input and exits with exit or a HUP.</p>
+<pre class='prettyprint lang-ruby'>
+loop do
+  repl[">> "]
+end
+</pre>
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
     
-	  <li><a href="/posts/build-a-simple-ruby-repl">Build a simple Ruby REPL</a> &mdash; 14 Mar 2013</li>
-    
 	  <li><a href="/posts/launching-a-company-in-an-international-marketplace">LAUNCHing a company in an international marketplace</a> &mdash; 06 Mar 2013</li>
     
 	  <li><a href="/posts/x-messages-slides">X-Messages Slides</a> &mdash; 26 Feb 2013</li>
+    
+	  <li><a href="/posts/x-messages">X-Messages</a> &mdash; 15 Dec 2012</li>
     
   </ul>
 </div>
