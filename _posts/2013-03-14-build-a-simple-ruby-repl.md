@@ -15,7 +15,7 @@ tags: ['ruby']
 
 A REPL is a [Read–eval–print loop](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop). The term is most usually used to refer to a [Lisp](http://en.wikipedia.org/wiki/Lisp_(programming_language)) interactive environment, however many other languages have a similar mechanism, like [IRB](http://en.wikipedia.org/wiki/Interactive_Ruby_Shell) with Ruby for example.
 
-Other nerds might call it an interactive toplevel or a language shell... but they should just knock it off, because that sounds dumb.
+Other nerds might call it an interactive toplevel or a language shell... but they should just knock it off, because that sounds fucking annoying.
 
 ## Why would I want one?
 
