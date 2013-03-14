@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2013-03-14T00:49:14-07:00</updated>
+ <updated>2013-03-14T00:57:18-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -40,9 +40,9 @@
 &lt;/div&gt;
 &lt;h2 id='what_is_a_repl'&gt;What is a REPL?&lt;/h2&gt;
 
-&lt;p&gt;A REPL is a &lt;a href='http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop'&gt;Read–eval–print loop&lt;/a&gt;. The term is most usually used to refer to a Lisp interactive environment, however many other languages have a similar mechanism, like IRB with Ruby for example.&lt;/p&gt;
+&lt;p&gt;A REPL is a &lt;a href='http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop'&gt;Read–eval–print loop&lt;/a&gt;. The term is most usually used to refer to a &lt;a href='http://en.wikipedia.org/wiki/Lisp_(programming_language'&gt;Lisp&lt;/a&gt;) interactive environment, however many other languages have a similar mechanism, like &lt;a href='http://en.wikipedia.org/wiki/Interactive_Ruby_Shell'&gt;IRB&lt;/a&gt; with Ruby for example.&lt;/p&gt;
 
-&lt;p&gt;Other nerds might call them an interactive toplevel or a language shell&amp;#8230; but they should just knock it off, because that sounds dumb.&lt;/p&gt;
+&lt;p&gt;Other nerds might call it an interactive toplevel or a language shell&amp;#8230; but they should just knock it off, because that sounds dumb.&lt;/p&gt;
 
 &lt;h2 id='why_would_i_want_one'&gt;Why would I want one?&lt;/h2&gt;
 
