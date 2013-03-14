@@ -4,7 +4,7 @@
  <title>Joseph Silvashy</title>
  <link href="http://jpsilvashy.com/atom.xml" rel="self"/>
  <link href="http://jpsilvashy.com/"/>
- <updated>2013-03-14T03:07:58-07:00</updated>
+ <updated>2013-03-14T03:16:21-07:00</updated>
  <id>http://jpsilvashy.com/</id>
  <author>
    <name>Joseph Silvashy</name>
@@ -38,46 +38,39 @@
 &lt;/svg&gt;
 
 &lt;/div&gt;
-&lt;p&gt;So this is part one in a series on building a mini web application as a service. We&amp;#8217;re going to make a multiplayer poker game server. Give it a try with curl right now.&lt;/p&gt;
-
-&lt;p&gt;Start a new game:&lt;/p&gt;
+&lt;p&gt;So this is part one in a series on building a mini web application as a service. We&amp;#8217;re going to make a multiplayer poker game server. Give it a try with curl right now (or I suppose you can use a browser like Chrome which should render the json response body in the browser, Firefox may ask you to download it). Let&amp;#8217;s start a new game:&lt;/p&gt;
 &lt;pre&gt;
-curl http://glacial-crag-1279.herokuapp.com/
+http://glacial-crag-1279.herokuapp.com/
 &lt;/pre&gt;
 &lt;p&gt;You&amp;#8217;ll get redirected to a url with a lady&amp;#8217;s name and some other random words. You&amp;#8217;ll also recieve the deck state with the face-suits as strings in an array. This was just a fun way to make semi-private games with your friends.&lt;/p&gt;
 &lt;pre&gt;
 http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport
+=&gt; [&quot;7h&quot;,&quot;Ah&quot;,&quot;2s&quot;,&quot;9h&quot;,&quot;Ks&quot;,&quot;Kd&quot;,&quot;Ts&quot;,&quot;4s&quot;,&quot;Ac&quot;,&quot;Qd&quot;,&quot;3d&quot;,&quot;As&quot;,&quot;6s&quot;,&quot;Kc&quot;,&quot;5d&quot;,&quot;Tc&quot;,&quot;7c&quot;,&quot;4d&quot;,&quot;Jc&quot;,&quot;5c&quot;,&quot;8s&quot;,&quot;Kh&quot;,&quot;3h&quot;,&quot;7s&quot;,&quot;5h&quot;,&quot;3c&quot;,&quot;Td&quot;,&quot;6d&quot;,&quot;Qs&quot;,&quot;2h&quot;,&quot;4h&quot;,&quot;8d&quot;,&quot;Th&quot;,&quot;Jh&quot;,&quot;9c&quot;,&quot;6h&quot;,&quot;2c&quot;,&quot;3s&quot;,&quot;8h&quot;,&quot;4c&quot;,&quot;Jd&quot;,&quot;Js&quot;,&quot;9d&quot;,&quot;7d&quot;,&quot;Ad&quot;,&quot;2d&quot;,&quot;8c&quot;,&quot;5s&quot;,&quot;9s&quot;,&quot;6c&quot;,&quot;Qh&quot;]
 &lt;/pre&gt;
-&lt;p&gt;The new deck is returned:&lt;/p&gt;
-&lt;pre&gt;
-[&quot;7h&quot;,&quot;Ah&quot;,&quot;2s&quot;,&quot;9h&quot;,&quot;Ks&quot;,&quot;Kd&quot;,&quot;Ts&quot;,&quot;4s&quot;,&quot;Ac&quot;,&quot;Qd&quot;,&quot;3d&quot;,&quot;As&quot;,&quot;6s&quot;,&quot;Kc&quot;,&quot;5d&quot;,&quot;Tc&quot;,&quot;7c&quot;,&quot;4d&quot;,&quot;Jc&quot;,&quot;5c&quot;,&quot;8s&quot;,&quot;Kh&quot;,&quot;3h&quot;,&quot;7s&quot;,&quot;5h&quot;,&quot;3c&quot;,&quot;Td&quot;,&quot;6d&quot;,&quot;Qs&quot;,&quot;2h&quot;,&quot;4h&quot;,&quot;8d&quot;,&quot;Th&quot;,&quot;Jh&quot;,&quot;9c&quot;,&quot;6h&quot;,&quot;2c&quot;,&quot;3s&quot;,&quot;8h&quot;,&quot;4c&quot;,&quot;Jd&quot;,&quot;Js&quot;,&quot;9d&quot;,&quot;7d&quot;,&quot;Ad&quot;,&quot;2d&quot;,&quot;8c&quot;,&quot;5s&quot;,&quot;9s&quot;,&quot;6c&quot;,&quot;Qh&quot;]
-&lt;/pre&gt;
-&lt;p&gt;So it&amp;#8217;s just an API so we&amp;#8217;ll use curl to deal the deck and play an ad-hoc game.&lt;/p&gt;
+&lt;p&gt;&lt;a href='http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport'&gt;emily-fuscia-westport&lt;/a&gt;, good name, here is the deck of cards:&lt;/p&gt;
 
-&lt;p&gt;Deal out a hand:&lt;/p&gt;
+&lt;p&gt;So it&amp;#8217;s important to recognize this is a simple API so we&amp;#8217;ll use curl to deal the deck and play an ad-hoc game. Deal out a hand:&lt;/p&gt;
 &lt;pre&gt;
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/deal.json
+=&gt; &quot;Qc&quot;
 &lt;/pre&gt;
 &lt;p&gt;The result is a two character string representation like so:&lt;/p&gt;
-&lt;pre&gt;
-&quot;Qc&quot;
-&lt;/pre&gt;
-&lt;p&gt;Shuffle the deck:&lt;/p&gt;
+
+&lt;p&gt;You can also shuffle the deck:&lt;/p&gt;
 &lt;pre&gt;
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/shuffle.json
 &lt;/pre&gt;
 &lt;p&gt;How many cards in the deck?&lt;/p&gt;
 &lt;pre&gt;
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/size.json
+=&gt; 51
 &lt;/pre&gt;
 &lt;p&gt;Burn a card from the deck, send the card face-suit as the card param.&lt;/p&gt;
 &lt;pre&gt;
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/burn.json?card=Qc
+=&gt; [&quot;7h&quot;,&quot;Ah&quot;,&quot;2s&quot;,&quot;9h&quot;,&quot;Ks&quot;,&quot;Kd&quot;,&quot;Ts&quot;,&quot;4s&quot;,&quot;Ac&quot;,&quot;Qd&quot;,&quot;3d&quot;,&quot;As&quot;,&quot;6s&quot;,&quot;Kc&quot;,&quot;5d&quot;,&quot;Tc&quot;,&quot;7c&quot;,&quot;4d&quot;,&quot;Jc&quot;,&quot;5c&quot;,&quot;8s&quot;,&quot;Kh&quot;,&quot;3h&quot;,&quot;7s&quot;,&quot;5h&quot;,&quot;3c&quot;,&quot;Td&quot;,&quot;6d&quot;,&quot;Qs&quot;,&quot;2h&quot;,&quot;4h&quot;,&quot;8d&quot;,&quot;Th&quot;,&quot;Jh&quot;,&quot;9c&quot;,&quot;6h&quot;,&quot;2c&quot;,&quot;3s&quot;,&quot;8h&quot;,&quot;4c&quot;,&quot;Jd&quot;,&quot;Js&quot;,&quot;9d&quot;,&quot;7d&quot;,&quot;Ad&quot;,&quot;2d&quot;,&quot;8c&quot;,&quot;5s&quot;,&quot;9s&quot;,&quot;6c&quot;,&quot;Qh&quot;]
 &lt;/pre&gt;
-&lt;p&gt;The current deck state will be returned:&lt;/p&gt;
-&lt;pre&gt;
-[&quot;7h&quot;,&quot;Ah&quot;,&quot;2s&quot;,&quot;9h&quot;,&quot;Ks&quot;,&quot;Kd&quot;,&quot;Ts&quot;,&quot;4s&quot;,&quot;Ac&quot;,&quot;Qd&quot;,&quot;3d&quot;,&quot;As&quot;,&quot;6s&quot;,&quot;Kc&quot;,&quot;5d&quot;,&quot;Tc&quot;,&quot;7c&quot;,&quot;4d&quot;,&quot;Jc&quot;,&quot;5c&quot;,&quot;8s&quot;,&quot;Kh&quot;,&quot;3h&quot;,&quot;7s&quot;,&quot;5h&quot;,&quot;3c&quot;,&quot;Td&quot;,&quot;6d&quot;,&quot;Qs&quot;,&quot;2h&quot;,&quot;4h&quot;,&quot;8d&quot;,&quot;Th&quot;,&quot;Jh&quot;,&quot;9c&quot;,&quot;6h&quot;,&quot;2c&quot;,&quot;3s&quot;,&quot;8h&quot;,&quot;4c&quot;,&quot;Jd&quot;,&quot;Js&quot;,&quot;9d&quot;,&quot;7d&quot;,&quot;Ad&quot;,&quot;2d&quot;,&quot;8c&quot;,&quot;5s&quot;,&quot;9s&quot;,&quot;6c&quot;,&quot;Qh&quot;]
-&lt;/pre&gt;</content>
+&lt;p&gt;After each command the current deck state will be returned, except for &lt;code&gt;deal&lt;/code&gt;.&lt;/p&gt;</content>
  </entry>
  
  <entry>

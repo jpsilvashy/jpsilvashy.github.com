@@ -50,46 +50,39 @@
 </svg>
 
 </div>
-<p>So this is part one in a series on building a mini web application as a service. We&#8217;re going to make a multiplayer poker game server. Give it a try with curl right now.</p>
-
-<p>Start a new game:</p>
+<p>So this is part one in a series on building a mini web application as a service. We&#8217;re going to make a multiplayer poker game server. Give it a try with curl right now (or I suppose you can use a browser like Chrome which should render the json response body in the browser, Firefox may ask you to download it). Let&#8217;s start a new game:</p>
 <pre>
-curl http://glacial-crag-1279.herokuapp.com/
+http://glacial-crag-1279.herokuapp.com/
 </pre>
 <p>You&#8217;ll get redirected to a url with a lady&#8217;s name and some other random words. You&#8217;ll also recieve the deck state with the face-suits as strings in an array. This was just a fun way to make semi-private games with your friends.</p>
 <pre>
 http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport
+=> ["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
 </pre>
-<p>The new deck is returned:</p>
-<pre>
-["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
-</pre>
-<p>So it&#8217;s just an API so we&#8217;ll use curl to deal the deck and play an ad-hoc game.</p>
+<p><a href='http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport'>emily-fuscia-westport</a>, good name, here is the deck of cards:</p>
 
-<p>Deal out a hand:</p>
+<p>So it&#8217;s important to recognize this is a simple API so we&#8217;ll use curl to deal the deck and play an ad-hoc game. Deal out a hand:</p>
 <pre>
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/deal.json
+=> "Qc"
 </pre>
 <p>The result is a two character string representation like so:</p>
-<pre>
-"Qc"
-</pre>
-<p>Shuffle the deck:</p>
+
+<p>You can also shuffle the deck:</p>
 <pre>
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/shuffle.json
 </pre>
 <p>How many cards in the deck?</p>
 <pre>
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/size.json
+=> 51
 </pre>
 <p>Burn a card from the deck, send the card face-suit as the card param.</p>
 <pre>
 curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/burn.json?card=Qc
+=> ["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
 </pre>
-<p>The current deck state will be returned:</p>
-<pre>
-["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
-</pre>
+<p>After each command the current deck state will be returned, except for <code>deal</code>.</p>
 </div>
 
 <div id="related">
