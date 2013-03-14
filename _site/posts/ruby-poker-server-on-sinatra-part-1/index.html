@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>X-Messages Slides</title>
+  <title>Ruby Poker Server on Sinatra (Part 1)</title>
   <meta name="author" content="Joseph Silvashy">
   <link href="http://feeds.feedburner.com/jpsilvashy" rel="alternate" title="Joseph Silvashy" type="application/atom+xml" />
 
@@ -26,11 +26,11 @@
 
     <section>
       <div id="post">
-  <h1>X-Messages Slides</h1>
+  <h1>Ruby Poker Server on Sinatra (Part 1)</h1>
   <p class="meta"></p>
 
-  <div class='callout'>
-  An example app using x-messages is available <a href='http://github.com/jpsilvashy/x-messages'>on Github</a>.
+  <div class='callout github'>
+  An example application for this post is available <a href='http://github.com/jpsilvashy/poker-server'>on Github</a>. The application itself is deployed <a href='http://glacial-crag-1279.herokuapp.com'>on Heroku</a>.
   <svg class='octocat' viewBox='-0.2 -1 379 334' xmlns='http://www.w3.org/2000/svg'>
  <path d='m296.94 295.43c0 20.533-47.56 37.176-106.22 37.176-58.67 0-106.23-16.643-106.23-37.176s47.558-37.18 106.23-37.18c58.66 0 106.22 16.65 106.22 37.18z' fill='#9CDAF1' id='puddle' />
   <g fill='#7DBBE6' id='shadow-legs'>
@@ -50,25 +50,63 @@
 </svg>
 
 </div>
-<h2 id='slides_for_my_xmessages_presentation'>Slides for my X-Messages presentation</h2>
-<script class='speakerdeck-embed' data-id='c56a4ad048b70130622912313819673f' data-ratio='1.77777777777778' src='//speakerdeck.com/assets/embed.js'>&nbsp;</script>
+<p>So this is part one in a series on building a mini web application as a service. We&#8217;re going to make a multiplayer poker game server. Give it a try with curl right now.</p>
+
+<p>Start a new game:</p>
+<pre>
+curl http://glacial-crag-1279.herokuapp.com/
+</pre>
+<p>You&#8217;ll get redirected to a url with a lady&#8217;s name and some other random words. You&#8217;ll also recieve the deck state with the face-suits as strings in an array. This was just a fun way to make semi-private games with your friends.</p>
+<pre>
+http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport
+</pre>
+<p>The new deck is returned:</p>
+<pre>
+["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
+</pre>
+<p>So it&#8217;s just an API so we&#8217;ll use curl to deal the deck and play an ad-hoc game.</p>
+
+<p>Deal out a hand:</p>
+<pre>
+curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/deal.json
+</pre>
+<p>The result is a two character string representation like so:</p>
+<pre>
+"Qc"
+</pre>
+<p>Shuffle the deck:</p>
+<pre>
+curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/shuffle.json
+</pre>
+<p>How many cards in the deck?</p>
+<pre>
+curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/size.json
+</pre>
+<p>Burn a card from the deck, send the card face-suit as the card param.</p>
+<pre>
+curl http://glacial-crag-1279.herokuapp.com/emily-fuscia-westport/burn.json?card=Qc
+</pre>
+<p>The current deck state will be returned:</p>
+<pre>
+["7h","Ah","2s","9h","Ks","Kd","Ts","4s","Ac","Qd","3d","As","6s","Kc","5d","Tc","7c","4d","Jc","5c","8s","Kh","3h","7s","5h","3c","Td","6d","Qs","2h","4h","8d","Th","Jh","9c","6h","2c","3s","8h","4c","Jd","Js","9d","7d","Ad","2d","8c","5s","9s","6c","Qh"]
+</pre>
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
     
-	  <li><a href="/posts/ruby-poker-server-on-sinatra-part-1">Ruby Poker Server on Sinatra (Part 1)</a> &mdash; 14 Mar 2013</li>
-    
 	  <li><a href="/posts/build-a-simple-ruby-repl">Build a simple Ruby REPL</a> &mdash; 14 Mar 2013</li>
     
 	  <li><a href="/posts/launching-a-company-in-an-international-marketplace">LAUNCHing a company in an international marketplace</a> &mdash; 06 Mar 2013</li>
+    
+	  <li><a href="/posts/x-messages-slides">X-Messages Slides</a> &mdash; 26 Feb 2013</li>
     
   </ul>
 </div>
 <h2>Comments</h2>
 
-<div class="fb-comments" data-href="http://jpsilvashy.com//posts/x-messages-slides" data-num-posts="10"></div>
+<div class="fb-comments" data-href="http://jpsilvashy.com//posts/ruby-poker-server-on-sinatra-part-1" data-num-posts="10"></div>
 
     </section>
 
