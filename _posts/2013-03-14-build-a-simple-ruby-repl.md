@@ -3,11 +3,11 @@ layout: post
 title: Build a simple Ruby REPL
 date: 2013-03-14
 category: development
-tags: ['ruby', 'ubuntu', 'aws']
+tags: ['ruby']
 ---
 
 <div class='callout github'>
-  Find the code for this post on <a href='http://github.com/jpsilvashy/repl'>on Github</a>. The application itself is deployed <a href='http://x-messages.herokuapp.com'>on Heroku</a>.
+  Find the code for this post on <a href='http://github.com/jpsilvashy/repl'>on Github</a>.
   {% include octocat.svg %}
 </div>
 
